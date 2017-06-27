@@ -2,13 +2,28 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs",
+            "text": "Welcome to Trent Docs\n\n\n\n\nQuick Dirty Reddis Nspawn Container on Arch Linux",
             "title": "Home"
         },
         {
             "location": "/#welcome-to-trent-docs",
-            "text": "",
+            "text": "Quick Dirty Reddis Nspawn Container on Arch Linux",
             "title": "Welcome to Trent Docs"
+        },
+        {
+            "location": "/arch_reddis_nspawn/",
+            "text": "Quick Dirty Reddis Nspawn Container on Arch Linux\n\n\nCreate a FileSystem\n\n\ncd /var/lib/machines\n# create a directory\nmkdir <container>\n# use pacstrap to create a file system\npacstrap -i -c -d <container> base --ignore linux",
+            "title": "Quick Dirty Reddis Nspawn Container on Arch Linux"
+        },
+        {
+            "location": "/arch_reddis_nspawn/#quick-dirty-reddis-nspawn-container-on-arch-linux",
+            "text": "",
+            "title": "Quick Dirty Reddis Nspawn Container on Arch Linux"
+        },
+        {
+            "location": "/arch_reddis_nspawn/#create-a-filesystem",
+            "text": "cd /var/lib/machines\n# create a directory\nmkdir <container>\n# use pacstrap to create a file system\npacstrap -i -c -d <container> base --ignore linux",
+            "title": "Create a FileSystem"
         }
     ]
 }
