@@ -2,28 +2,58 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\n\n\nQuick Dirty Reddis Nspawn Container on Arch Linux",
+            "text": "Welcome to Trent Docs\n\n\n\n\nNspawn Containers\n\n\nQuick Dirty Reddis Nspawn Container on Arch Linux",
             "title": "Home"
         },
         {
             "location": "/#welcome-to-trent-docs",
-            "text": "Quick Dirty Reddis Nspawn Container on Arch Linux",
+            "text": "Nspawn Containers  Quick Dirty Reddis Nspawn Container on Arch Linux",
             "title": "Welcome to Trent Docs"
         },
         {
+            "location": "/nspawn/",
+            "text": "Nspawn Containers\n\n\nArch Linux Wiki for Nspawn Containers\n\n\nCreate a FileSystem\n\n\ncd /var/lib/machines\n# create a directory\nmkdir <container>\n# use pacstrap to create a file system\npacstrap -i -c -d <container> base --ignore linux\n\n\n\n\nFirst boot and create root password\n\n\nsystemd-nspawn -b -D <container>\npasswd\npoweroff\n# if you want to nat the container add *-n* flag\nsystemd-nspawn -b -D <container> -n\n# and to bind mount the package cache\nsystemd-nspawn -b -D <container> -n --bind=/var/cache/pacman/pkg\n\n\n\n\nNetworking\n\n\nOn Arch, assuming you have systemd-networkd and systemd-resolved\nset up correctly, networking from the host end of things should\njust work.\n\nHowever on Linode it does not. What does work on Linode is to create\na bridge interface. Two files for br0 will get the job done.\n\n\n# /etc/systemd/network/50-br0.netdev\n[NetDev]\nName=br0\nKind=bridge\n\n\n\n\n# /etc/systemd/network/50-br0.netdev\n[Match]\nName=br0\n\n[Network]\nAddress=10.0.55.1/24\nDHCPServer=yes\nIPMasquerade=yes\n\n\n\n\nNotice how the configuration file tells systemd-networkd to offer\nDHCP service and to perform masquerade. You can modify the \nsystemd-nspawn\n\ncommand to use the bridge interface. Every container attached to this bridge\nwill be on the same subnet and able to talk to each other.\n\n\n# first restart systemd-networkd to bring up the new bridge interface\nsystemctl restart systemd-networkd\n# and add --network-bridge=br0 to systemd-nspawn command\nsystemd-nspawn -b -D <container> --network-bridge=br0 --bind=/var/cache/pacman/pkg\n\n\n\n\nAutomatically Starting the Container\n\n\nThere are two ways to automate starting the container. You can override\n\nsystemd-nspawn@.service\n or create an \nnspawn\n file.  \n\n\nFirst enable machines.target\n\n\n# to override the systemd-nspawn@.service file\ncp /lib/systemd/system/systemd-nspawn@.service /etc/systemd/system/systemd-nspawn@<container>.service\n\n\n\n\nEdit \n/etc/systemd/system/systemd-nspawn@<container>.service\n to add the \nsystemd-nspawn\n options\nyou want to the \nExecStart\n command.\n\n\nOr create \n/etc/systemd/nspawn/<container>.nspawn\n\n\n# /etc/systemd/nspawn/<container>.nspawn\nBind=/var/cache/pacman/pkg\n\n[Network]\nBridge=br0\n\n\n\n\n# in either case\nsystemctl start/enable systemd-nspawn@<container>\n# to get a shell\nmachinectl shell <container>\n# and then to get an environment\nbash\n\n\n\n\nInitial Configuration Inside The Container\n\n\n# set time zone if you don't want UTC\ntimedatectl set-timezone <timezone>\n# enable ntp, networktime\ntimedatectl set-ntp 1\n\n\n\n\nIf you want to change the locale",
+            "title": "Nspawn"
+        },
+        {
+            "location": "/nspawn/#nspawn-containers",
+            "text": "Arch Linux Wiki for Nspawn Containers",
+            "title": "Nspawn Containers"
+        },
+        {
+            "location": "/nspawn/#create-a-filesystem",
+            "text": "cd /var/lib/machines\n# create a directory\nmkdir <container>\n# use pacstrap to create a file system\npacstrap -i -c -d <container> base --ignore linux",
+            "title": "Create a FileSystem"
+        },
+        {
+            "location": "/nspawn/#first-boot-and-create-root-password",
+            "text": "systemd-nspawn -b -D <container>\npasswd\npoweroff\n# if you want to nat the container add *-n* flag\nsystemd-nspawn -b -D <container> -n\n# and to bind mount the package cache\nsystemd-nspawn -b -D <container> -n --bind=/var/cache/pacman/pkg",
+            "title": "First boot and create root password"
+        },
+        {
+            "location": "/nspawn/#networking",
+            "text": "On Arch, assuming you have systemd-networkd and systemd-resolved\nset up correctly, networking from the host end of things should\njust work. \nHowever on Linode it does not. What does work on Linode is to create\na bridge interface. Two files for br0 will get the job done.  # /etc/systemd/network/50-br0.netdev\n[NetDev]\nName=br0\nKind=bridge  # /etc/systemd/network/50-br0.netdev\n[Match]\nName=br0\n\n[Network]\nAddress=10.0.55.1/24\nDHCPServer=yes\nIPMasquerade=yes  Notice how the configuration file tells systemd-networkd to offer\nDHCP service and to perform masquerade. You can modify the  systemd-nspawn \ncommand to use the bridge interface. Every container attached to this bridge\nwill be on the same subnet and able to talk to each other.  # first restart systemd-networkd to bring up the new bridge interface\nsystemctl restart systemd-networkd\n# and add --network-bridge=br0 to systemd-nspawn command\nsystemd-nspawn -b -D <container> --network-bridge=br0 --bind=/var/cache/pacman/pkg",
+            "title": "Networking"
+        },
+        {
+            "location": "/nspawn/#automatically-starting-the-container",
+            "text": "There are two ways to automate starting the container. You can override systemd-nspawn@.service  or create an  nspawn  file.    First enable machines.target  # to override the systemd-nspawn@.service file\ncp /lib/systemd/system/systemd-nspawn@.service /etc/systemd/system/systemd-nspawn@<container>.service  Edit  /etc/systemd/system/systemd-nspawn@<container>.service  to add the  systemd-nspawn  options\nyou want to the  ExecStart  command.  Or create  /etc/systemd/nspawn/<container>.nspawn  # /etc/systemd/nspawn/<container>.nspawn\nBind=/var/cache/pacman/pkg\n\n[Network]\nBridge=br0  # in either case\nsystemctl start/enable systemd-nspawn@<container>\n# to get a shell\nmachinectl shell <container>\n# and then to get an environment\nbash",
+            "title": "Automatically Starting the Container"
+        },
+        {
+            "location": "/nspawn/#initial-configuration-inside-the-container",
+            "text": "# set time zone if you don't want UTC\ntimedatectl set-timezone <timezone>\n# enable ntp, networktime\ntimedatectl set-ntp 1  If you want to change the locale",
+            "title": "Initial Configuration Inside The Container"
+        },
+        {
             "location": "/arch_reddis_nspawn/",
-            "text": "Quick Dirty Reddis Nspawn Container on Arch Linux\n\n\nCreate a FileSystem\n\n\ncd /var/lib/machines\n# create a directory\nmkdir <container>\n# use pacstrap to create a file system\npacstrap -i -c -d <container> base --ignore linux",
+            "text": "Quick Dirty Reddis Nspawn Container on Arch Linux\n\n\nRefer to the \nNspawn\n page for setting up the nspawn container.",
             "title": "Quick Dirty Reddis Nspawn Container on Arch Linux"
         },
         {
             "location": "/arch_reddis_nspawn/#quick-dirty-reddis-nspawn-container-on-arch-linux",
-            "text": "",
+            "text": "Refer to the  Nspawn  page for setting up the nspawn container.",
             "title": "Quick Dirty Reddis Nspawn Container on Arch Linux"
-        },
-        {
-            "location": "/arch_reddis_nspawn/#create-a-filesystem",
-            "text": "cd /var/lib/machines\n# create a directory\nmkdir <container>\n# use pacstrap to create a file system\npacstrap -i -c -d <container> base --ignore linux",
-            "title": "Create a FileSystem"
         }
     ]
 }
