@@ -1,0 +1,6 @@
+site_name: Trent Docs
+
+theme:    readthedocs
+
+pages:
+    - 'Home': index.md
