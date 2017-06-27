@@ -1,0 +1,14 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Welcome to Trent Docs",
+            "title": "Home"
+        },
+        {
+            "location": "/#welcome-to-trent-docs",
+            "text": "",
+            "title": "Welcome to Trent Docs"
+        }
+    ]
+}
