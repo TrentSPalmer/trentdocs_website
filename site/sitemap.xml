@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-06-27</lastmod>
+     <lastmod>2017-06-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,15 +12,31 @@
     
     <url>
      <loc>/nspawn/</loc>
-     <lastmod>2017-06-27</lastmod>
+     <lastmod>2017-06-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/arch_reddis_nspawn/</loc>
-     <lastmod>2017-06-27</lastmod>
+     <loc>/arch_redis_nspawn/</loc>
+     <lastmod>2017-06-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/arch_postgresql_nspawn/</loc>
+     <lastmod>2017-06-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/server_and_share_apps_from_your_phone_with_fdroid/</loc>
+     <lastmod>2017-06-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

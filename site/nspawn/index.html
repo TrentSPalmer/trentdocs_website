@@ -79,7 +79,17 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../arch_reddis_nspawn/">Quick Dirty Reddis Nspawn Container on Arch Linux</a>
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../server_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
 	    </li>
           
         </ul>
@@ -115,7 +125,7 @@
             <div class="section">
               
                 <h1 id="nspawn-containers">Nspawn Containers</h1>
-<p><a href="https://wiki.archlinux.org/index.php/Systemd-nspawn">Arch Linux Wiki for Nspawn Containers</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Systemd-nspawn">This Link For Arch Linux Wiki for Nspawn Containers</a></p>
 <h3 id="create-a-filesystem">Create a FileSystem</h3>
 <pre><code class="bash">cd /var/lib/machines
 # create a directory
@@ -124,6 +134,12 @@ mkdir &lt;container&gt;
 pacstrap -i -c -d &lt;container&gt; base --ignore linux
 </code></pre>
 
+<p>At this point you might want to copy over some configs to save time later.</p>
+<ul>
+<li>/etc/locale.conf</li>
+<li>/root/.bashrc</li>
+<li>/etc/locale.gen</li>
+</ul>
 <h3 id="first-boot-and-create-root-password">First boot and create root password</h3>
 <pre><code class="bash">systemd-nspawn -b -D &lt;container&gt;
 passwd
@@ -197,6 +213,15 @@ bash
 timedatectl set-timezone &lt;timezone&gt;
 # enable ntp, networktime
 timedatectl set-ntp 1
+# enable networking from inside the container
+systemctl enable systemd-networkd
+systemctl start systemd-networkd
+systemctl enable systemd-resolved
+systemctl start systemd-resolved
+rm /etc/resolv.conf 
+ln -s /run/systemd/resolve/resolv.conf /etc/
+# ping google
+ping -c 3 google.com
 </code></pre>
 
 <p><a href="https://wiki.archlinux.org/index.php/locale">If you want to change the locale</a></p>
@@ -207,7 +232,7 @@ timedatectl set-ntp 1
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../arch_reddis_nspawn/" class="btn btn-neutral float-right" title="Quick Dirty Reddis Nspawn Container on Arch Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../arch_redis_nspawn/" class="btn btn-neutral float-right" title="Quick Dirty Redis Nspawn Container on Arch Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -239,7 +264,7 @@ timedatectl set-ntp 1
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../arch_reddis_nspawn/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../arch_redis_nspawn/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

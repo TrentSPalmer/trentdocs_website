@@ -1,6 +1,6 @@
 # Nspawn Containers
 
-[Arch Linux Wiki for Nspawn Containers](https://wiki.archlinux.org/index.php/Systemd-nspawn)
+[This Link For Arch Linux Wiki for Nspawn Containers](https://wiki.archlinux.org/index.php/Systemd-nspawn)
 
 ### Create a FileSystem
 
@@ -11,6 +11,13 @@ mkdir <container>
 # use pacstrap to create a file system
 pacstrap -i -c -d <container> base --ignore linux
 ```
+
+
+At this point you might want to copy over some configs to save time later.
+
+* /etc/locale.conf
+* /root/.bashrc
+* /etc/locale.gen
 
 ### First boot and create root password
 
@@ -102,6 +109,15 @@ bash
 timedatectl set-timezone <timezone>
 # enable ntp, networktime
 timedatectl set-ntp 1
+# enable networking from inside the container
+systemctl enable systemd-networkd
+systemctl start systemd-networkd
+systemctl enable systemd-resolved
+systemctl start systemd-resolved
+rm /etc/resolv.conf 
+ln -s /run/systemd/resolve/resolv.conf /etc/
+# ping google
+ping -c 3 google.com
 ```
 
 [If you want to change the locale](https://wiki.archlinux.org/index.php/locale)

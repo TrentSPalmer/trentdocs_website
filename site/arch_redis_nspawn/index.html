@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Quick Dirty Reddis Nspawn Container on Arch Linux - Trent Docs</title>
+  <title>Quick Dirty Redis Nspawn Container on Arch Linux - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Quick Dirty Reddis Nspawn Container on Arch Linux";
-    var mkdocs_page_input_path = "arch_reddis_nspawn.md";
-    var mkdocs_page_url = "/arch_reddis_nspawn/";
+    var mkdocs_page_name = "Quick Dirty Redis Nspawn Container on Arch Linux";
+    var mkdocs_page_input_path = "arch_redis_nspawn.md";
+    var mkdocs_page_url = "/arch_redis_nspawn/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -59,13 +59,23 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Quick Dirty Reddis Nspawn Container on Arch Linux</a>
+    <a class="current" href="./">Quick Dirty Redis Nspawn Container on Arch Linux</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#quick-dirty-reddis-nspawn-container-on-arch-linux">Quick Dirty Reddis Nspawn Container on Arch Linux</a></li>
+    <li class="toctree-l2"><a href="#quick-dirty-redis-nspawn-container-on-arch-linux">Quick Dirty Redis Nspawn Container on Arch Linux</a></li>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../server_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
 	    </li>
           
         </ul>
@@ -90,7 +100,7 @@
     
       
     
-    <li>Quick Dirty Reddis Nspawn Container on Arch Linux</li>
+    <li>Quick Dirty Redis Nspawn Container on Arch Linux</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -100,14 +110,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="quick-dirty-reddis-nspawn-container-on-arch-linux">Quick Dirty Reddis Nspawn Container on Arch Linux</h1>
+                <h1 id="quick-dirty-redis-nspawn-container-on-arch-linux">Quick Dirty Redis Nspawn Container on Arch Linux</h1>
 <p>Refer to the <a href="../nspawn/">Nspawn</a> page for setting up the nspawn container.</p>
+<p>Once you have the container running, it seems all you have to do to get
+things working in a container subnet is to change the bind address.</p>
+<pre><code class="text"># /etc/redis.conf
+# bind 127.0.0.1
+bind 0.0.0.0
+</code></pre>
+
+<p>you can nmap port 6379, be sure to restart redis</p>
+<p><a href="https://wiki.archlinux.org/index.php/Redis">Again I would refer you to the Arch Wiki</a></p>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../arch_postgresql_nspawn/" class="btn btn-neutral float-right" title="Quick Dirty Postgresql Nspawn Container on Arch Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../nspawn/" class="btn btn-neutral" title="Nspawn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -138,6 +159,8 @@
       
         <span><a href="../nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../arch_postgresql_nspawn/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
