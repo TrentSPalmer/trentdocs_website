@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nNspawn Containers\n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nServe And Share Apps From Your Phone With Fdroid",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux",
             "title": "Home"
         },
         {
@@ -12,8 +12,133 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Nspawn Containers  Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Serve And Share Apps From Your Phone With Fdroid",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux",
             "title": "Git Repo For These Docs"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/",
+            "text": "Serve And Share Apps From Your Phone With Fdroid\n\n\nStep 3: you are born on third base, find the menu item for \nSwap apps\n on phone one\n\n\nOpen fdroid, and navigate to the menu by touching three dots in upper right hand corner of the screen. Select \nSwap apps\n.\n\n\n\n\nStep 4: enable the repo server on phone one\n\n\nOn the next screen toggle on \nVisible via Wi-Fi\n\n\n\n\nStep 5: a small step for your android\n\n\nAt the bottom of the screen select \nSCAN QR CODE\n\n\n\n\nStep 6: choose which apps to serve from phone one\n\n\nAt the next screen \nChoose Apps\n you want to xerve I mean serve and then touch the -> right arrow to proceed\n\n\n\n\nStep 7: another small step for your android\n\n\nTouch the -> right arrow again, do it.\n\n\n\n\nOcho: <- this means step eight\n\n\nTouch the -> right arrow until you are coming here\n\n\n\nNotice you can use either a qr code or a local url, so grab one of your other phones.\n\n\nPrivacy Friendly Qr Scanner\n appears to be a good Qr scanner,\nbut of course you can key in the url by hand too.\n\n\nStep 9: find the menu item for \nRepositories\n on phone two\n\n\nOn your other phone open fdroid, navigate to menu by selecting the 3 dots in the upper right hand corner and choose \nRepositories\n\n\n\n\nStep 10: (temporarily) toggle off the remote repos on phone two\n\n\nToggle all the current repos off and then if you want to key in the new local repo url by hand touch the + plus in the upper right hand corner\n\n\n\n\nStep 11 A: key in the local repo url by hand on phone two\n\n\nAfter touching the + plus button in \nStep Ten\n on phone two, you can fill in the url address that corresponds to the photo in \nOcho\n\n\n\n\nStep 12 A: or scan in the local repo url with qr code on phone two\n\n\nIf you prefer not to key in the url by hand, on phone two touch the\nhome button and then open your qr-scanning application and scan the\nqr code on phone one, as seen in photo \nOcho\n. The qr-scanning\napp will direct you to open fdroid, and your result will be the same as\nthe photo in \nStep Eleven A\n\n\nStep 13: profit from moar faster local downloads\n\n\nOn phone two you can now download and install apps and updates from phone one, and the download speed will be much faster than from the internet.\n\n\n\n\nStep 14: how to remember all this?\n\n\nYou can bookmark.\n\n\nIn fact, you can add a shortcut icon directly to \n\nthis page\n,\non your home screen,\nas seen here with IceCat, a debranded build of the latest extended-support-release\nof FireFox for Android.\n\n\nOr you can clone \nthe git repo\n\nwhich this site automatically builds itself from.",
+            "title": "Serve And Share Apps From Your Phone With Fdroid"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#serve-and-share-apps-from-your-phone-with-fdroid",
+            "text": "",
+            "title": "Serve And Share Apps From Your Phone With Fdroid"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-3-you-are-born-on-third-base-find-the-menu-item-for-swap-apps-on-phone-one",
+            "text": "",
+            "title": "Step 3: you are born on third base, find the menu item for Swap apps on phone one"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#open-fdroid-and-navigate-to-the-menu-by-touching-three-dots-in-upper-right-hand-corner-of-the-screen-select-swap-apps",
+            "text": "",
+            "title": "Open fdroid, and navigate to the menu by touching three dots in upper right hand corner of the screen. Select Swap apps."
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-4-enable-the-repo-server-on-phone-one",
+            "text": "",
+            "title": "Step 4: enable the repo server on phone one"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#on-the-next-screen-toggle-on-visible-via-wi-fi",
+            "text": "",
+            "title": "On the next screen toggle on Visible via Wi-Fi"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-5-a-small-step-for-your-android",
+            "text": "",
+            "title": "Step 5: a small step for your android"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#at-the-bottom-of-the-screen-select-scan-qr-code",
+            "text": "",
+            "title": "At the bottom of the screen select SCAN QR CODE"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-6-choose-which-apps-to-serve-from-phone-one",
+            "text": "",
+            "title": "Step 6: choose which apps to serve from phone one"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#at-the-next-screen-choose-apps-you-want-to-xerve-i-mean-serve-and-then-touch-the-right-arrow-to-proceed",
+            "text": "",
+            "title": "At the next screen Choose Apps you want to xerve I mean serve and then touch the -&gt; right arrow to proceed"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-7-another-small-step-for-your-android",
+            "text": "",
+            "title": "Step 7: another small step for your android"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#touch-the-right-arrow-again-do-it",
+            "text": "",
+            "title": "Touch the -&gt; right arrow again, do it."
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#ocho-this-means-step-eight",
+            "text": "",
+            "title": "Ocho: &lt;- this means step eight"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#touch-the-right-arrow-until-you-are-coming-here",
+            "text": "Notice you can use either a qr code or a local url, so grab one of your other phones.  Privacy Friendly Qr Scanner  appears to be a good Qr scanner,\nbut of course you can key in the url by hand too.",
+            "title": "Touch the -&gt; right arrow until you are coming here"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-9-find-the-menu-item-for-repositories-on-phone-two",
+            "text": "",
+            "title": "Step 9: find the menu item for Repositories on phone two"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#on-your-other-phone-open-fdroid-navigate-to-menu-by-selecting-the-3-dots-in-the-upper-right-hand-corner-and-choose-repositories",
+            "text": "",
+            "title": "On your other phone open fdroid, navigate to menu by selecting the 3 dots in the upper right hand corner and choose Repositories"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-10-temporarily-toggle-off-the-remote-repos-on-phone-two",
+            "text": "",
+            "title": "Step 10: (temporarily) toggle off the remote repos on phone two"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#toggle-all-the-current-repos-off-and-then-if-you-want-to-key-in-the-new-local-repo-url-by-hand-touch-the-plus-in-the-upper-right-hand-corner",
+            "text": "",
+            "title": "Toggle all the current repos off and then if you want to key in the new local repo url by hand touch the + plus in the upper right hand corner"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-11-a-key-in-the-local-repo-url-by-hand-on-phone-two",
+            "text": "",
+            "title": "Step 11 A: key in the local repo url by hand on phone two"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#after-touching-the-plus-button-in-step-ten-on-phone-two-you-can-fill-in-the-url-address-that-corresponds-to-the-photo-in-ocho",
+            "text": "",
+            "title": "After touching the + plus button in Step Ten on phone two, you can fill in the url address that corresponds to the photo in Ocho"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-12-a-or-scan-in-the-local-repo-url-with-qr-code-on-phone-two",
+            "text": "If you prefer not to key in the url by hand, on phone two touch the\nhome button and then open your qr-scanning application and scan the\nqr code on phone one, as seen in photo  Ocho . The qr-scanning\napp will direct you to open fdroid, and your result will be the same as\nthe photo in  Step Eleven A",
+            "title": "Step 12 A: or scan in the local repo url with qr code on phone two"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-13-profit-from-moar-faster-local-downloads",
+            "text": "",
+            "title": "Step 13: profit from moar faster local downloads"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#on-phone-two-you-can-now-download-and-install-apps-and-updates-from-phone-one-and-the-download-speed-will-be-much-faster-than-from-the-internet",
+            "text": "",
+            "title": "On phone two you can now download and install apps and updates from phone one, and the download speed will be much faster than from the internet."
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-14-how-to-remember-all-this",
+            "text": "",
+            "title": "Step 14: how to remember all this?"
+        },
+        {
+            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#you-can-bookmark",
+            "text": "In fact, you can add a shortcut icon directly to  this page ,\non your home screen,\nas seen here with IceCat, a debranded build of the latest extended-support-release\nof FireFox for Android. \nOr you can clone  the git repo \nwhich this site automatically builds itself from.",
+            "title": "You can bookmark."
         },
         {
             "location": "/nspawn/",
@@ -69,126 +194,6 @@
             "location": "/arch_postgresql_nspawn/#quick-dirty-postgresql-nspawn-container-on-arch-linux",
             "text": "Refer to the  Nspawn  page for setting up the nspawn container.",
             "title": "Quick Dirty Postgresql Nspawn Container on Arch Linux"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/",
-            "text": "Serve And Share Apps From Your Phone With Fdroid\n\n\nFind The Menu Item for \nSwap apps\n\n\nStep 3 you are born on third base\n\n\nOpen fdroid, and navigate to the menu by touching three dots in upper right hand corner of the screen. Select \nSwap apps\n.\n\n\n\n\nStep 4\n\n\nOn the next screen toggle on \nVisible via Wi-Fi\n\n\n\n\nStep 5\n\n\nAt the bottom of the screen select \nSCAN QR CODE\n\n\n\n\nStep 6\n\n\nAt the next screen \nChoose Apps\n you want to xerve I mean serve and then touch the -> right arrow to proceed\n\n\n\n\nStep 7\n\n\nTouch the -> right arrow again, do it.\n\n\n\n\nOcho\n\n\nTouch the -> right arrow until you are coming here\n\n\n\nNotice you can use either a qr code or a local url, so grab one of your other phones.\n\n\nPrivacy Friendly Qr Scanner\n appears to be a good Qr scanner,\nbut of course you can key in the url by hand too.\n\n\nStep Nine\n\n\nOn your other phone open fdroid, navigate to menu by selecting the 3 dots in the upper right hand corner and choose \nRepositories\n\n\n\n\nStep Ten\n\n\nToggle all the current repos off and then if you want to key in the new local repo url by hand touch the + plus in the upper right hand corner\n\n\n\n\nStep Eleven A\n\n\nAfter touching the + plus button in \nStep Ten\n on phone two, you can fill in the url address that corresponds to the photo in \nOcho\n\n\n\n\nStep Twelve A\n\n\nIf you prefer not to key in the url by hand, on phone two touch the\nhome button and then open your qr-scanning application and scan the\nqr code on phone one, as seen in photo \nOcho\n. The qr-scanning\napp will direct you to open fdroid, and your result will be the same as\nthe photo in \nStep Eleven A\n\n\nStep Thirteen\n\n\nOn phone two you can now download and install apps and updates from phone one, and the download speed will be much faster than from the internet.",
-            "title": "Serve And Share Apps From Your Phone With Fdroid"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#serve-and-share-apps-from-your-phone-with-fdroid",
-            "text": "",
-            "title": "Serve And Share Apps From Your Phone With Fdroid"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#find-the-menu-item-for-swap-apps",
-            "text": "",
-            "title": "Find The Menu Item for Swap apps"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-3-you-are-born-on-third-base",
-            "text": "",
-            "title": "Step 3 you are born on third base"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#open-fdroid-and-navigate-to-the-menu-by-touching-three-dots-in-upper-right-hand-corner-of-the-screen-select-swap-apps",
-            "text": "",
-            "title": "Open fdroid, and navigate to the menu by touching three dots in upper right hand corner of the screen. Select Swap apps."
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-4",
-            "text": "",
-            "title": "Step 4"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#on-the-next-screen-toggle-on-visible-via-wi-fi",
-            "text": "",
-            "title": "On the next screen toggle on Visible via Wi-Fi"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-5",
-            "text": "",
-            "title": "Step 5"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#at-the-bottom-of-the-screen-select-scan-qr-code",
-            "text": "",
-            "title": "At the bottom of the screen select SCAN QR CODE"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-6",
-            "text": "",
-            "title": "Step 6"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#at-the-next-screen-choose-apps-you-want-to-xerve-i-mean-serve-and-then-touch-the-right-arrow-to-proceed",
-            "text": "",
-            "title": "At the next screen Choose Apps you want to xerve I mean serve and then touch the -&gt; right arrow to proceed"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-7",
-            "text": "",
-            "title": "Step 7"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#touch-the-right-arrow-again-do-it",
-            "text": "",
-            "title": "Touch the -&gt; right arrow again, do it."
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#ocho",
-            "text": "",
-            "title": "Ocho"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#touch-the-right-arrow-until-you-are-coming-here",
-            "text": "Notice you can use either a qr code or a local url, so grab one of your other phones.  Privacy Friendly Qr Scanner  appears to be a good Qr scanner,\nbut of course you can key in the url by hand too.",
-            "title": "Touch the -&gt; right arrow until you are coming here"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-nine",
-            "text": "",
-            "title": "Step Nine"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#on-your-other-phone-open-fdroid-navigate-to-menu-by-selecting-the-3-dots-in-the-upper-right-hand-corner-and-choose-repositories",
-            "text": "",
-            "title": "On your other phone open fdroid, navigate to menu by selecting the 3 dots in the upper right hand corner and choose Repositories"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-ten",
-            "text": "",
-            "title": "Step Ten"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#toggle-all-the-current-repos-off-and-then-if-you-want-to-key-in-the-new-local-repo-url-by-hand-touch-the-plus-in-the-upper-right-hand-corner",
-            "text": "",
-            "title": "Toggle all the current repos off and then if you want to key in the new local repo url by hand touch the + plus in the upper right hand corner"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-eleven-a",
-            "text": "",
-            "title": "Step Eleven A"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#after-touching-the-plus-button-in-step-ten-on-phone-two-you-can-fill-in-the-url-address-that-corresponds-to-the-photo-in-ocho",
-            "text": "",
-            "title": "After touching the + plus button in Step Ten on phone two, you can fill in the url address that corresponds to the photo in Ocho"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-twelve-a",
-            "text": "If you prefer not to key in the url by hand, on phone two touch the\nhome button and then open your qr-scanning application and scan the\nqr code on phone one, as seen in photo  Ocho . The qr-scanning\napp will direct you to open fdroid, and your result will be the same as\nthe photo in  Step Eleven A",
-            "title": "Step Twelve A"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#step-thirteen",
-            "text": "",
-            "title": "Step Thirteen"
-        },
-        {
-            "location": "/server_and_share_apps_from_your_phone_with_fdroid/#on-phone-two-you-can-now-download-and-install-apps-and-updates-from-phone-one-and-the-download-speed-will-be-much-faster-than-from-the-internet",
-            "text": "",
-            "title": "On phone two you can now download and install apps and updates from phone one, and the download speed will be much faster than from the internet."
         }
     ]
 }
