@@ -194,10 +194,19 @@ cp /lib/systemd/system/systemd-nspawn@.service /etc/systemd/system/systemd-nspaw
 you want to the <code>ExecStart</code> command.</p>
 <p>Or create <code>/etc/systemd/nspawn/&lt;container&gt;.nspawn</code></p>
 <pre><code class="text"># /etc/systemd/nspawn/&lt;container&gt;.nspawn
+[Files]
 Bind=/var/cache/pacman/pkg
 
 [Network]
 Bridge=br0
+</code></pre>
+
+<pre><code class="text"># /etc/systemd/nspawn/&lt;container&gt;.nspawn
+[Files]
+Bind=/var/cache/pacman/pkg
+
+[Network]
+VirtualEthernet=1 # this seems to be the default sometimes, though
 </code></pre>
 
 <pre><code class="bash"># in either case

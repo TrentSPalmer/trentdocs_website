@@ -85,12 +85,23 @@ Edit `/etc/systemd/system/systemd-nspawn@<container>.service` to add the `system
 you want to the `ExecStart` command.
 
 Or create `/etc/systemd/nspawn/<container>.nspawn`
+
 ```text
 # /etc/systemd/nspawn/<container>.nspawn
+[Files]
 Bind=/var/cache/pacman/pkg
 
 [Network]
 Bridge=br0
+```
+
+```text
+# /etc/systemd/nspawn/<container>.nspawn
+[Files]
+Bind=/var/cache/pacman/pkg
+
+[Network]
+VirtualEthernet=1 # this seems to be the default sometimes, though
 ```
 
 ```bash

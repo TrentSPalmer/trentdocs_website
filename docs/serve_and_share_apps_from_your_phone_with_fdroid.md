@@ -1,5 +1,5 @@
-# Serve And Share Apps From Your Phone With Fdroid
-
+# Serve And Share Apps From Your Phone With Fdroid  
+This can speed up the process of updating apps on your devices, especially if fdroid is slow.  
 ## Step 3: you are born on third base, find the menu item for *Swap apps* on phone one
 ### Open fdroid, and navigate to the menu by touching three dots in upper right hand corner of the screen. Select *Swap apps*.
 ![alt text](Screenshot_20170628-115844.png)
