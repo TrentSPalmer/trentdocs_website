@@ -2,6 +2,8 @@
 
 [This Link For Arch Linux Wiki for Nspawn Containers](https://wiki.archlinux.org/index.php/Systemd-nspawn)
 
+I like the idea of starting with the easy containers first.
+
 ### Create a FileSystem
 
 ```bash
@@ -24,6 +26,15 @@ At this point you might want to copy over some configs to save time later.
 ```bash
 systemd-nspawn -b -D <container>
 passwd
+# assuming you copied over /etc/locale.gen
+locale-gen
+# set timezone
+timedatectl set-timezone <timezone>
+# enable network time
+timedatectl set-ntp 1
+# enable networking
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
 poweroff
 # if you want to nat the container add *-n* flag
 systemd-nspawn -b -D <container> -n
@@ -32,6 +43,7 @@ systemd-nspawn -b -D <container> -n --bind=/var/cache/pacman/pkg
 ```
 
 ### Networking
+Here's a link that skips ahead to [Automatically Starting the Container](#automatically-starting-the-container)
 
 On Arch, assuming you have systemd-networkd and systemd-resolved
 set up correctly, networking from the host end of things should
@@ -52,7 +64,7 @@ Kind=bridge
 Name=br0
 
 [Network]
-Address=10.0.55.1/24
+Address=10.0.55.1/24 # arbitrarily pick a subnet range to taste
 DHCPServer=yes
 IPMasquerade=yes
 ```
@@ -70,6 +82,8 @@ systemd-nspawn -b -D <container> --network-bridge=br0 --bind=/var/cache/pacman/p
 ```
 
 ### Automatically Starting the Container
+Here's a link back up to [Networking](#networking)
+in case you previously skipped ahead.
 
 There are two ways to automate starting the container. You can override
 `systemd-nspawn@.service` or create an *nspawn* file.  
@@ -112,6 +126,9 @@ machinectl shell <container>
 bash
 ```
 
+This would be a good time to check for network and name resolution,
+symlink resolv.conf if need be.
+
 ### Initial Configuration Inside The Container
 
 ```bash
@@ -131,3 +148,21 @@ ping -c 3 google.com
 ```
 
 [If you want to change the locale](https://wiki.archlinux.org/index.php/locale)
+
+## Final Observations
+* You can start/stop nspawn containers with `machinectl` command. 
+* You can start nspawn containers with `systemd-nspawn` command.
+* You can configure the systemd service for a container with @nspawn.service file override
+* Or you can configure an nspawn container with a dot.nspawn file
+
+But in regards to the above list
+I have noticed differences in behaviour,
+in some scenarios, concerning file attributes
+for bind mounts.
+
+Another curiosity: when you have nspawn containers natted on VirtualEthernet connections,
+they might be able to ping each other at 10.x.y.z, but not resolve each other. But they might
+be able to resolve each other if they are all connected to the same bridge interface or nspawn
+network zone, but will randomly resolve each other in any of the 10.x.y.z, 169.x.y.z,
+or fe80::....:....:....%host (ipv6 local) spaces, which would complicate configuring the containers
+to talk to each other. But I intend to look into this some more.

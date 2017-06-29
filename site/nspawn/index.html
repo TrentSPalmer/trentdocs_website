@@ -76,6 +76,8 @@
         
             <li><a class="toctree-l3" href="#initial-configuration-inside-the-container">Initial Configuration Inside The Container</a></li>
         
+            <li><a class="toctree-l3" href="#final-observations">Final Observations</a></li>
+        
         </ul>
     
 
@@ -126,6 +128,7 @@
               
                 <h1 id="nspawn-containers">Nspawn Containers</h1>
 <p><a href="https://wiki.archlinux.org/index.php/Systemd-nspawn">This Link For Arch Linux Wiki for Nspawn Containers</a></p>
+<p>I like the idea of starting with the easy containers first.</p>
 <h3 id="create-a-filesystem">Create a FileSystem</h3>
 <pre><code class="bash">cd /var/lib/machines
 # create a directory
@@ -143,6 +146,15 @@ pacstrap -i -c -d &lt;container&gt; base --ignore linux
 <h3 id="first-boot-and-create-root-password">First boot and create root password</h3>
 <pre><code class="bash">systemd-nspawn -b -D &lt;container&gt;
 passwd
+# assuming you copied over /etc/locale.gen
+locale-gen
+# set timezone
+timedatectl set-timezone &lt;timezone&gt;
+# enable network time
+timedatectl set-ntp 1
+# enable networking
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
 poweroff
 # if you want to nat the container add *-n* flag
 systemd-nspawn -b -D &lt;container&gt; -n
@@ -151,6 +163,7 @@ systemd-nspawn -b -D &lt;container&gt; -n --bind=/var/cache/pacman/pkg
 </code></pre>
 
 <h3 id="networking">Networking</h3>
+<p>Here's a link that skips ahead to <a href="#automatically-starting-the-container">Automatically Starting the Container</a></p>
 <p>On Arch, assuming you have systemd-networkd and systemd-resolved
 set up correctly, networking from the host end of things should
 just work.<br />
@@ -167,7 +180,7 @@ Kind=bridge
 Name=br0
 
 [Network]
-Address=10.0.55.1/24
+Address=10.0.55.1/24 # arbitrarily pick a subnet range to taste
 DHCPServer=yes
 IPMasquerade=yes
 </code></pre>
@@ -183,6 +196,8 @@ systemd-nspawn -b -D &lt;container&gt; --network-bridge=br0 --bind=/var/cache/pa
 </code></pre>
 
 <h3 id="automatically-starting-the-container">Automatically Starting the Container</h3>
+<p>Here's a link back up to <a href="#networking">Networking</a>
+in case you previously skipped ahead.</p>
 <p>There are two ways to automate starting the container. You can override
 <code>systemd-nspawn@.service</code> or create an <em>nspawn</em> file.  </p>
 <p>First enable machines.target</p>
@@ -217,6 +232,8 @@ machinectl shell &lt;container&gt;
 bash
 </code></pre>
 
+<p>This would be a good time to check for network and name resolution,
+symlink resolv.conf if need be.</p>
 <h3 id="initial-configuration-inside-the-container">Initial Configuration Inside The Container</h3>
 <pre><code class="bash"># set time zone if you don't want UTC
 timedatectl set-timezone &lt;timezone&gt;
@@ -234,6 +251,23 @@ ping -c 3 google.com
 </code></pre>
 
 <p><a href="https://wiki.archlinux.org/index.php/locale">If you want to change the locale</a></p>
+<h2 id="final-observations">Final Observations</h2>
+<ul>
+<li>You can start/stop nspawn containers with <code>machinectl</code> command. </li>
+<li>You can start nspawn containers with <code>systemd-nspawn</code> command.</li>
+<li>You can configure the systemd service for a container with @nspawn.service file override</li>
+<li>Or you can configure an nspawn container with a dot.nspawn file</li>
+</ul>
+<p>But in regards to the above list
+I have noticed differences in behaviour,
+in some scenarios, concerning file attributes
+for bind mounts.</p>
+<p>Another curiosity: when you have nspawn containers natted on VirtualEthernet connections,
+they might be able to ping each other at 10.x.y.z, but not resolve each other. But they might
+be able to resolve each other if they are all connected to the same bridge interface or nspawn
+network zone, but will randomly resolve each other in any of the 10.x.y.z, 169.x.y.z,
+or fe80::....:....:....%host (ipv6 local) spaces, which would complicate configuring the containers
+to talk to each other. But I intend to look into this some more.</p>
               
             </div>
           </div>
