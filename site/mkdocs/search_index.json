@@ -177,12 +177,12 @@
         },
         {
             "location": "/arch_redis_nspawn/",
-            "text": "Quick Dirty Redis Nspawn Container on Arch Linux\n\n\nRefer to the \nNspawn\n page for setting up the nspawn container.\n\n\nOnce you have the container running, it seems all you have to do to get\nthings working in a container subnet is to change the bind address.\n\n\n# /etc/redis.conf\n# bind 127.0.0.1\nbind 0.0.0.0\n\n\n\n\nyou can nmap port 6379, be sure to restart redis\n\n\nAgain I would refer you to the Arch Wiki",
+            "text": "Quick Dirty Redis Nspawn Container on Arch Linux\n\n\nRefer to the \nNspawn\n page for setting up the nspawn container,\ninstall redis, and start/enable redis.service.\nOnce you have the container running, it seems all you have to do to get\nthings working in a container subnet is to change the bind address.\n\n\n# /etc/redis.conf\n# bind 127.0.0.1\nbind 0.0.0.0\n\n\n\n\nyou can nmap port 6379, be sure to restart redis\n\n\nAgain I would refer you to the Arch Wiki",
             "title": "Quick Dirty Redis Nspawn Container on Arch Linux"
         },
         {
             "location": "/arch_redis_nspawn/#quick-dirty-redis-nspawn-container-on-arch-linux",
-            "text": "Refer to the  Nspawn  page for setting up the nspawn container.  Once you have the container running, it seems all you have to do to get\nthings working in a container subnet is to change the bind address.  # /etc/redis.conf\n# bind 127.0.0.1\nbind 0.0.0.0  you can nmap port 6379, be sure to restart redis  Again I would refer you to the Arch Wiki",
+            "text": "Refer to the  Nspawn  page for setting up the nspawn container,\ninstall redis, and start/enable redis.service.\nOnce you have the container running, it seems all you have to do to get\nthings working in a container subnet is to change the bind address.  # /etc/redis.conf\n# bind 127.0.0.1\nbind 0.0.0.0  you can nmap port 6379, be sure to restart redis  Again I would refer you to the Arch Wiki",
             "title": "Quick Dirty Redis Nspawn Container on Arch Linux"
         },
         {

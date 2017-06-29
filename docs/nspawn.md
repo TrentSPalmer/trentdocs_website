@@ -46,7 +46,6 @@ Name=br0
 Kind=bridge
 ```
 
-
 ```text
 # /etc/systemd/network/50-br0.netdev
 [Match]

@@ -1,7 +1,7 @@
 # Quick Dirty Redis Nspawn Container on Arch Linux
 
-Refer to the [Nspawn](nspawn.md) page for setting up the nspawn container.
-
+Refer to the [Nspawn](nspawn.md) page for setting up the nspawn container,
+install redis, and start/enable redis.service.
 Once you have the container running, it seems all you have to do to get
 things working in a container subnet is to change the bind address.
 
