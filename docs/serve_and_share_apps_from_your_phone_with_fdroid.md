@@ -42,7 +42,7 @@ the photo in [Step Eleven A](#step-eleven-a)
 ## Step 14: how to remember all this?
 ### You can bookmark.
 In fact, you can add a shortcut icon directly to 
-[this page](http://trentsonlinedocs.xyz/server_and_share_apps_from_your_phone_with_fdroid),
+[this page](http://trentsonlinedocs.xyz/serve_and_share_apps_from_your_phone_with_fdroid),
 on your home screen,
 as seen here with IceCat, a debranded build of the latest extended-support-release
 of FireFox for Android.
