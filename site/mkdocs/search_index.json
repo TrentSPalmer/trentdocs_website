@@ -192,12 +192,12 @@
         },
         {
             "location": "/arch_postgresql_nspawn/",
-            "text": "Quick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nRefer to the \nNspawn\n page for setting up the nspawn container.",
+            "text": "Quick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nRefer to the \nNspawn\n page for setting up the nspawn container.\n\nAnd then refer the \nArchWiki instructions\n\nfor postgresql.  \n\n\nYou'll want to install postgresql, set a password for the default user \npostgres\n,\nand then login as postgres and initilize the database.  \n\n\npacman -S postgresql\n# passwd for postgresql user \npasswd postgres \n# login as postgres \nsu -l postgres\n# initialize the databse cluster\n[postgres]$ initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'\n\n\n\n\nYou'll need to configure \n/var/lib/postgres/data/pg_hba.conf\n and\n\n/var/lib/postgres/data/postgresql.conf\n for remote access,\npresumably with an identd daemon in mind.  The ident daemon will\nlisten on port 113, not on the machine with the database server,\nbut it listens from the machine where is the client that remotely\nwants to access the database.",
             "title": "Quick Dirty Postgresql Nspawn Container on Arch Linux"
         },
         {
             "location": "/arch_postgresql_nspawn/#quick-dirty-postgresql-nspawn-container-on-arch-linux",
-            "text": "Refer to the  Nspawn  page for setting up the nspawn container.",
+            "text": "Refer to the  Nspawn  page for setting up the nspawn container. \nAnd then refer the  ArchWiki instructions \nfor postgresql.    You'll want to install postgresql, set a password for the default user  postgres ,\nand then login as postgres and initilize the database.    pacman -S postgresql\n# passwd for postgresql user \npasswd postgres \n# login as postgres \nsu -l postgres\n# initialize the databse cluster\n[postgres]$ initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'  You'll need to configure  /var/lib/postgres/data/pg_hba.conf  and /var/lib/postgres/data/postgresql.conf  for remote access,\npresumably with an identd daemon in mind.  The ident daemon will\nlisten on port 113, not on the machine with the database server,\nbut it listens from the machine where is the client that remotely\nwants to access the database.",
             "title": "Quick Dirty Postgresql Nspawn Container on Arch Linux"
         }
     ]
