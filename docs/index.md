@@ -4,8 +4,10 @@ Obviously, the commit history will reflect the time when these documents are wri
 
 * [Serve And Share Apps From Your Phone With Fdroid](serve_and_share_apps_from_your_phone_with_fdroid.md)
 * [Nspawn Containers](nspawn.md)
+* [Dynamic Cacheing Nginx Reverse Proxy For Pacman](dynamic_cacheing_nginx_reverse_proxy_for_pacman.md)
 * [Quick Dirty Redis Nspawn Container on Arch Linux](arch_redis_nspawn.md)
 * [Quick Dirty Postgresql Nspawn Container on Arch Linux](arch_postgresql_nspawn.md)
+* [Self Signed Certs](self_signed_certs.md)
 
 <!---
     * [Template](Template.md)

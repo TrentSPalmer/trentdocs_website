@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Dynamic Cacheing Nginx Reverse Proxy For Pacman - Trent Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Dynamic Cacheing Nginx Reverse Proxy For Pacman";
+    var mkdocs_page_input_path = "dynamic_cacheing_nginx_reverse_proxy_for_pacman.md";
+    var mkdocs_page_url = "/dynamic_cacheing_nginx_reverse_proxy_for_pacman/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Trent Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../serve_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../nspawn/">Nspawn</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#dynamic-cacheing-nginx-reverse-proxy-for-pacman">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#you-set-up-a-dynamic-cacheing-reverse-proxy-and-then-you-put-the-ip-address-or-hostname-for-that-server-in-etcpacmandmirrorlist-on-your-client-machines">You set up a dynamic cacheing reverse proxy and then you put the ip address or hostname for that server in /etc/pacman.d/mirrorlist on your client machines.</a></li>
+        
+            <li><a class="toctree-l3" href="#nginx-configuration">nginx configuration</a></li>
+        
+            <li><a class="toctree-l3" href="#systemd-service-that-cleans-the-proxy-cache">systemd service that cleans the proxy cache</a></li>
+        
+            <li><a class="toctree-l3" href="#systemd-timer-for-the-systemd-service-that-cleans-the-proxy-cache">systemd timer for the systemd service that cleans the proxy cache</a></li>
+        
+            <li><a class="toctree-l3" href="#systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache">systemd service that deletes the pacman database files from the proxy cache</a></li>
+        
+            <li><a class="toctree-l3" href="#systemd-timer-for-the-systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache">systemd timer for the systemd service that deletes the pacman database files from the proxy cache</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../self_signed_certs/">Self Signed Certs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Trent Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Dynamic Cacheing Nginx Reverse Proxy For Pacman</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dynamic-cacheing-nginx-reverse-proxy-for-pacman">Dynamic Cacheing Nginx Reverse Proxy For Pacman</h1>
+<h2 id="you-set-up-a-dynamic-cacheing-reverse-proxy-and-then-you-put-the-ip-address-or-hostname-for-that-server-in-etcpacmandmirrorlist-on-your-client-machines">You set up a dynamic cacheing reverse proxy and then you put the ip address or hostname for that server in <code>/etc/pacman.d/mirrorlist</code> on your client machines.</h2>
+<p>Of course if you want to you can set this up and run it in an
+<a href="../nspawn/">Nspawn Container</a>.
+The <a href="https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Dynamic_reverse_proxy_cache_using_nginx">ArchWiki Page for pacman tips</a>
+mostly spells out what to do, but I want to document
+the exact steps I would take.</p>
+<p>As for how you would run this on a server with other virtual hosts?
+Who cares? That is what is so brilliant about using using an
+nspawn container, in that it behaves like just another
+computer on the lan with it's own ip address.  But it only does one
+thing, and that's all you have to configure it for.</p>
+<p>I see no reason to use nginx-mainline instead of stable.</p>
+<pre><code class="bash">pacman -S nginx
+</code></pre>
+
+<p>The suggested configuration in the Arch Wiki
+is to create a directory <code>/srv/http/pacman-cache</code>,
+and that seems to work well enough</p>
+<pre><code class="bash">mkdir /srv/http/pacman-cache
+# and then change it's ownershipt
+chown http:http /srv/http/pacman-cache
+</code></pre>
+
+<h2 id="nginx-configuration">nginx configuration</h2>
+<p>and then it references an nginx.conf in
+<a href="https://gist.github.com/anonymous/97ec4148f643de925e433bed3dc7ee7d">this gist</a>,
+but that is not a complete nginx.conf and so here is a method to get that
+working as of July 2017 with a fresh install of nginx.</p>
+<p>You can start with a default <code>/etc/nginx/nginx.conf</code>,
+and add the line <code>include sites-enabled/*;</code>
+at the end of the <em>http</em> section.</p>
+<pre><code class="text"># /etc/nginx/nginx.conf
+#user html;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+    #                  '$status $body_bytes_sent &quot;$http_referer&quot; '
+    #                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+
+    # HTTPS server
+    #
+    #server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+    include sites-enabled/*;
+
+}
+</code></pre>
+
+<p>And then create the directory <code>/etc/nginx/sites-enabled</code></p>
+<pre><code class="bash">mkdir /etc/nginx/sites-enabled
+</code></pre>
+
+<p>And then create <code>/etc/nginx/sites-enabled/proxy_cache.conf</code>,
+which is <em>mostly</em> a
+<a href="https://gist.github.com/anonymous/97ec4148f643de925e433bed3dc7ee7d">copy-and-paste from this gist</a>.</p>
+<p>Notice the <em>server_name</em>. This has to match the entry in
+<code>/etc/pacman.d/mirrorlist</code> on the client machines you are
+updating from. If you can use the hostname, great. But if you
+have to assign static ip addresses and explicitly write the local
+ip address instead, then that should match what you write in your mirrorlist.</p>
+<p>And of course your mirrorlist entry
+on the client machine, has to preserve the directory scheme.</p>
+<pre><code class="text"># /etc/pacman.d/mirrorlist
+Server = http://&lt;hostname or ip address&gt;:&lt;port if not 80&gt;/archlinux/$repo/os/$arch
+</code></pre>
+
+<pre><code class="text"># /etc/nginx/sites-enabled/proxy_cache.conf
+# nginx may need to resolve domain names at run time
+resolver 8.8.8.8 8.8.4.4;
+
+# Pacman Cache
+server
+{
+listen      80;
+server_name &lt;hostname or ip address&gt;; # has to match the entry in mirrorlist on client machine.
+root        /srv/http/pacman-cache;
+autoindex   on;
+
+    # Requests for package db and signature files should redirect upstream without caching
+    # Well that's the default anyway.
+    # But what if you're spinning up a lot of nspawn containers, don't want to waste all that bandwidth?
+    # I choose to instead run a systemd timer that deletes the *db files once every 15 minutes
+    location ~ \.(db|sig)$ {
+        try_files $uri @pkg_mirror;
+        # proxy_pass http://mirrors$request_uri;
+    }
+
+    # Requests for actual packages should be served directly from cache if available.
+    #   If not available, retrieve and save the package from an upstream mirror.
+    location ~ \.tar\.xz$ {
+        try_files $uri @pkg_mirror;
+    }
+
+    # Retrieve package from upstream mirrors and cache for future requests
+    location @pkg_mirror {
+        proxy_store    on;
+        proxy_redirect off;
+        proxy_store_access  user:rw group:rw all:r;
+        proxy_next_upstream error timeout http_404;
+        proxy_pass          http://mirrors$request_uri;
+    }
+}
+
+# Upstream Arch Linux Mirrors
+# - Configure as many backend mirrors as you want in the blocks below
+# - Servers are used in a round-robin fashion by nginx
+# - Add &quot;backup&quot; if you want to only use the mirror upon failure of the other mirrors
+# - Separate &quot;server&quot; configurations are required for each upstream mirror so we can set the &quot;Host&quot; header appropriately
+upstream mirrors {
+server localhost:8001;
+server localhost:8002; # backup
+server localhost:8003; # backup
+}
+
+# Arch Mirror 1 Proxy Configuration
+server
+{
+listen      8001;
+server_name localhost;
+
+    location / {
+        proxy_pass       http://mirrors.kernel.org$request_uri;
+        proxy_set_header Host mirrors.kernel.org;
+    }
+}
+
+# Arch Mirror 2 Proxy Configuration
+server
+{
+listen      8002;
+server_name localhost;
+
+    location / {
+        proxy_pass       http://mirrors.ocf.berkeley.edu$request_uri;
+        proxy_set_header Host mirrors.ocf.berkeley.edu;
+    }
+}
+
+# Arch Mirror 3 Proxy Configuration
+server
+{
+    listen      8003;
+    server_name localhost;
+
+    location / {
+        proxy_pass       http://mirrors.cat.pdx.edu$request_uri;
+        proxy_set_header Host mirrors.cat.pdx.edu;
+    }
+}
+</code></pre>
+
+<h2 id="systemd-service-that-cleans-the-proxy-cache">systemd service that cleans the proxy cache</h2>
+<h3 id="dont-enable-the-service-enable-the-timer">don't enable the service, enable the timer</h3>
+<pre><code class="bash">systemctl enable/start /etc/systemd/system/proxy_cache_clean.timer
+</code></pre>
+
+<p>Keeps the 2 most recent versions of each package using paccache command.</p>
+<pre><code class="text"># /etc/systemd/system/proxy_cache_clean.service
+[Unit]
+Description=Clean The pacman proxy cache
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/find /srv/http/pacman-cache/ -type d -exec /usr/bin/paccache -v -r -k 2 -c {} \;
+StandardOutput=syslog
+StandardError=syslog
+</code></pre>
+
+<h2 id="systemd-timer-for-the-systemd-service-that-cleans-the-proxy-cache">systemd timer for the systemd service that cleans the proxy cache</h2>
+<pre><code class="text"># /etc/systemd/system/proxy_cache_clean.timer
+[Unit]
+Description=Timer for clean The pacman proxy cache
+
+[Timer]
+OnBootSec=20min
+OnUnitActiveSec=100h
+Unit=proxy_cache_clean.service
+
+[Install]
+WantedBy=timers.target
+</code></pre>
+
+<h2 id="systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache">systemd service that deletes the pacman database files from the proxy cache</h2>
+<h3 id="dont-enable-the-service-enable-the-timer_1">don't enable the service, enable the timer</h3>
+<pre><code class="bash">systemctl enable/start /etc/systemd/system/proxy_cache_database_clean.timer
+</code></pre>
+
+<p>You won't need this if you don't cache the database files. But if you do cache
+the database files, then you'll just be stuck with old database files, unless
+you periodically delete them. But I'm not sure about all this, will keep an
+eye on things.</p>
+<pre><code class="text"># /etc/systemd/system/proxy_cache_database_clean.service
+[Unit]
+Description=Clean The pacman proxy cache database
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c &quot;for f in $(find /srv -name *db) ; do rm $f; done&quot;
+StandardOutput=syslog
+StandardError=syslog
+</code></pre>
+
+<h2 id="systemd-timer-for-the-systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache">systemd timer for the systemd service that deletes the pacman database files from the proxy cache</h2>
+<pre><code class="text"># /etc/systemd/system/proxy_cache_database_clean.timer
+[Unit]
+Description=Timer for clean The pacman proxy cache database
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=15min
+Unit=proxy_cache_database_clean.service
+
+[Install]
+WantedBy=timers.target
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../arch_redis_nspawn/" class="btn btn-neutral float-right" title="Quick Dirty Redis Nspawn Container on Arch Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../nspawn/" class="btn btn-neutral" title="Nspawn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../arch_redis_nspawn/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

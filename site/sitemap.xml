@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-06-29</lastmod>
+     <lastmod>2017-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/serve_and_share_apps_from_your_phone_with_fdroid/</loc>
-     <lastmod>2017-06-29</lastmod>
+     <lastmod>2017-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,15 @@
     
     <url>
      <loc>/nspawn/</loc>
-     <lastmod>2017-06-29</lastmod>
+     <lastmod>2017-07-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/dynamic_cacheing_nginx_reverse_proxy_for_pacman/</loc>
+     <lastmod>2017-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +36,7 @@
     
     <url>
      <loc>/arch_redis_nspawn/</loc>
-     <lastmod>2017-06-29</lastmod>
+     <lastmod>2017-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +44,15 @@
     
     <url>
      <loc>/arch_postgresql_nspawn/</loc>
-     <lastmod>2017-06-29</lastmod>
+     <lastmod>2017-07-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/self_signed_certs/</loc>
+     <lastmod>2017-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
