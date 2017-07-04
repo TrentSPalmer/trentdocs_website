@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Debian Nspawn Container On Arch For Testing Apache Configurations - Trent Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Debian Nspawn Container On Arch For Testing Apache Configurations";
+    var mkdocs_page_input_path = "debian_nspawn_container_on_arch_for_testing_apache_configurations.md";
+    var mkdocs_page_url = "/debian_nspawn_container_on_arch_for_testing_apache_configurations/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Trent Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../serve_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../nspawn/">Nspawn</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Debian Nspawn Container On Arch For Testing Apache Configurations</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#debian-nspawn-container-on-arch-for-testing-apache-configurations">Debian Nspawn Container On Arch For Testing Apache Configurations</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../self_signed_certs/">Self Signed Certs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Trent Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Debian Nspawn Container On Arch For Testing Apache Configurations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="debian-nspawn-container-on-arch-for-testing-apache-configurations">Debian Nspawn Container On Arch For Testing Apache Configurations</h1>
+<p>Begin by exporting the environmental variable for your squid cacheing 
+proxy. If you're deboostrapping Debian file systems, the best way to
+speed this up is with squid.</p>
+<p>The ArchWiki page for nspawn containers has a
+<a href="https://wiki.archlinux.org/index.php/Systemd-nspawn#Create_a_Debian_or_Ubuntu_environment">Debian/Ubuntu subsection</a>
+Obviously you're going to want to install debootstrap and debian-archive-keyring.</p>
+<pre><code class="bash"># to create a Stretch Container
+cd /var/lib/machines 
+mkdir &lt;container name&gt; 
+deboostrap stretch &lt;container name&gt;
+</code></pre>
+
+<p>After some experimentation, perhaps this is the best time to write
+the intended hostname into the container, and write any
+apt-cacher or apt-cacher-ng proxies into /etc/apt/apt.conf 
+on the container.</p>
+<pre><code class="bash">cp apt.conf /etc/apt/apt.conf 
+echo &quot;&lt;hostname&gt;&quot; &gt; /var/lib/machines/&lt;container name&gt;/etc/hostname
+</code></pre>
+
+<p>And then start the container, and set the root password.</p>
+<pre><code class="bash"># boot in interactive mode
+systemd-nspawn -D &lt;container name&gt;
+# set the passwd and logout
+password 
+logout 
+</code></pre>
+
+<p>Now we can boot the container in non-interactive mode, either
+from the command line or using nspawn files. In either case 
+double check that the your bind mounts have the correct permissions 
+from inside the container.</p>
+<pre><code class="bash"># for instance attached to a bridge interface br0 
+systemd-nspawn -b -D &lt;container name&gt; --network-bridge=br0
+# or if you've set up a package cache 
+systemd-nspawn -b -D &lt;container name&gt; --network-bridge=br0 --bind=/var/cache/apt/archives
+</code></pre>
+
+<p>Alternately, if you use an nspawn file, then you can use a command 
+similar to the following to start it, you'll first need to 
+boot the container from the command line and install dbus,
+because <code>machinectl shell</code> and <code>machinectl login</code> won't work 
+without dbus. In this case use the following sequence of commands.</p>
+<pre><code class="bash"># start the container and login as root
+systemd-nspawn -b -D &lt;container name&gt; --network-bridge=br0 
+# bring up networking so you can install dbus
+# this is also a good time to install and configure locale
+apt install dbus locales 
+# to configure locale 
+dpkg-reconfigure locales 
+poweroff
+</code></pre>
+
+<p>After this you can start the container with systemd, when 
+using an nspawn file.</p>
+<pre><code class="bash">systemctl start systemd-nspawn@&lt;container name&gt;
+</code></pre>
+
+<pre><code class="text"># /etc/systemd/nspawn/&lt;container name&gt;.spawn 
+[Files] 
+# Bind=/var/cache/apt/archives 
+
+[Network] 
+bridge=br0 
+</code></pre>
+
+<p>You can use tasksel to install a web-server.</p>
+<pre><code class="bash"># apache2 will immediately be listening on port 80
+tasksel install web-server
+# enable mod ssl
+a2enmod ssl ; systemctl restart apache2
+# enable the default ssl test page 
+a2ensite /etc/apache2/sites-available/default-ssl.conf
+</code></pre>
+
+<p>You'll be up and running with the default self-signed certs.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/" class="btn btn-neutral float-right" title="Dynamic Cacheing Nginx Reverse Proxy For Pacman">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../nspawn/" class="btn btn-neutral" title="Nspawn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
