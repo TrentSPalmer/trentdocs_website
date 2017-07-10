@@ -57,6 +57,7 @@ without dbus. In this case use the following sequence of commands.
 # start the container and login as root
 systemd-nspawn -b -D <container name> --network-bridge=br0 
 # bring up networking so you can install dbus
+systemctl enable/start systemd-networkd
 # this is also a good time to install and configure locale
 apt install dbus locales 
 # to configure locale 
@@ -88,7 +89,7 @@ tasksel install web-server
 # enable mod ssl
 a2enmod ssl ; systemctl restart apache2
 # enable the default ssl test page 
-a2ensite /etc/apache2/sites-available/default-ssl.conf
+a2ensite default-ssl.conf ; systemctl reload apache2
 ```
 
 You'll be up and running with the default self-signed certs.
