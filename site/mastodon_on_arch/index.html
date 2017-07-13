@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Quick Dirty Redis Nspawn Container on Arch Linux - Trent Docs</title>
+  <title>Mastodon on Arch - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Quick Dirty Redis Nspawn Container on Arch Linux";
-    var mkdocs_page_input_path = "arch_redis_nspawn.md";
-    var mkdocs_page_url = "/arch_redis_nspawn/";
+    var mkdocs_page_name = "Mastodon on Arch";
+    var mkdocs_page_input_path = "mastodon_on_arch.md";
+    var mkdocs_page_url = "/mastodon_on_arch/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,9 +62,25 @@
     <a class="" href="../nspawn/">Nspawn</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../mastodon_on_arch/">Mastodon on Arch</a>
+    <a class="current" href="./">Mastodon on Arch</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#some-observations-about-installing-mastodon-on-arch">Some Observations About Installing Mastodon on Arch.</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#nginx">Nginx</a></li>
+        
+            <li><a class="toctree-l3" href="#installing-the-dependancies">Installing the Dependancies</a></li>
+        
+            <li><a class="toctree-l3" href="#other-observations">Other Observations</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -77,15 +93,9 @@
     <a class="" href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Quick Dirty Redis Nspawn Container on Arch Linux</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#quick-dirty-redis-nspawn-container-on-arch-linux">Quick Dirty Redis Nspawn Container on Arch Linux</a></li>
-    
-
-    </ul>
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -120,7 +130,7 @@
     
       
     
-    <li>Quick Dirty Redis Nspawn Container on Arch Linux</li>
+    <li>Mastodon on Arch</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -130,18 +140,54 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="quick-dirty-redis-nspawn-container-on-arch-linux">Quick Dirty Redis Nspawn Container on Arch Linux</h1>
-<p>Refer to the <a href="../nspawn/">Nspawn</a> page for setting up the nspawn container,
-install redis, and start/enable redis.service.
-Once you have the container running, it seems all you have to do to get
-things working in a container subnet is to change the bind address.</p>
-<pre><code class="text"># /etc/redis.conf
-# bind 127.0.0.1
-bind 0.0.0.0
+                <h1 id="some-observations-about-installing-mastodon-on-arch">Some Observations About Installing Mastodon on Arch.</h1>
+<h2 id="nginx">Nginx</h2>
+<p>From the <a href="https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Production-guide.md">Production Guide</a>
+you can copy the example nginx.conf file to <code>/etc/nginx/sites-enabled/some_arbitrary.conf</code>,
+and then add the following to <code>/etc/nginx/nginx.conf</code> in the http section,
+this with a fresh install of nginx with the default configuration file.</p>
+<pre><code class="bash"># /etc/nginx/nginx.conf 
+http {
+    include sites-enabled/*;
+}
 </code></pre>
 
-<p>you can nmap port 6379, be sure to restart redis</p>
-<p><a href="https://wiki.archlinux.org/index.php/Redis">Again I would refer you to the Arch Wiki</a></p>
+<h2 id="installing-the-dependancies">Installing the Dependancies</h2>
+<pre><code class="bash">pacman -S certbot nginx libxml2 imagemagick ffmpeg git yarn npm python2 oidentd
+</code></pre>
+
+<pre><code class="bash"># I'm guessing here
+pacman -S libpqxx libxslt protobuf protobuf-c
+</code></pre>
+
+<ul>
+<li>I'm assuming base-devel is installed</li>
+<li>python2 seems to be required to run <code>yarn install</code> command later on</li>
+<li>oidentd seems to be a usable replacement for pident</li>
+<li>libpqxx pulls in postgresql-libs</li>
+<li>file is already installed</li>
+<li>curl is already installed</li>
+<li>ruby-build and rbenv are installable from aur</li>
+<li>also postgresql and redis unless, those are in another container or whatever.</li>
+</ul>
+<h2 id="other-observations">Other Observations</h2>
+<p>I discovered that between <code>gem install bundler</code> and<br />
+<code>bundle install --deployment --without development test</code>,
+you have to update your environment, with 
+<code>eval "$(rbenv init -)"</code>, i.e.</p>
+<pre><code class="bash">echo 'eval &quot;$(rbenv init -)&quot;' &gt;&gt; .bashrc
+# and then
+. ~/.bashrc
+</code></pre>
+
+<p>You have to update your environment more than once, during the
+installation.</p>
+<p>Presumably you don't ever want to delete the <code>~/live/Public/</code> directory
+if that is where assets are being stored, but it seems ok to delete 
+<code>~/live/node_modules</code> and then rerun the <code>yarn install</code> command.</p>
+<p>In <code>~/live/.env.production</code>, <code>SINGLE_USER_MODE=false</code> has to be set
+to <code>false</code> until at least one user is created, or the web service won't 
+even start.  (Also <code>chmod 755 ~/</code>)</p>
               
             </div>
           </div>
@@ -149,10 +195,10 @@ bind 0.0.0.0
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../arch_postgresql_nspawn/" class="btn btn-neutral float-right" title="Quick Dirty Postgresql Nspawn Container on Arch Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/" class="btn btn-neutral float-right" title="Debian Nspawn Container On Arch For Testing Apache Configurations">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/" class="btn btn-neutral" title="Dynamic Cacheing Nginx Reverse Proxy For Pacman"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nspawn/" class="btn btn-neutral" title="Nspawn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -178,10 +224,10 @@ bind 0.0.0.0
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../arch_postgresql_nspawn/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

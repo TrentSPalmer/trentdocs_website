@@ -4,6 +4,7 @@ Obviously, the commit history will reflect the time when these documents are wri
 
 * [Serve And Share Apps From Your Phone With Fdroid](serve_and_share_apps_from_your_phone_with_fdroid.md)
 * [Nspawn Containers](nspawn.md)
+* [Mastodon on Arch](mastodon_on_arch.md)
 * [Debian Nspawn Container On Arch For Testing Apache Configurations](debian_nspawn_container_on_arch_for_testing_apache_configurations.md)
 * [Dynamic Cacheing Nginx Reverse Proxy For Pacman](dynamic_cacheing_nginx_reverse_proxy_for_pacman.md)
 * [Quick Dirty Redis Nspawn Container on Arch Linux](arch_redis_nspawn.md)
