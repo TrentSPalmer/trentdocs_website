@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nSelf Signed Certs",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nSelf Signed Certs",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Self Signed Certs",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Self Signed Certs",
             "title": "Git Repo For These Docs"
         },
         {
@@ -264,6 +264,51 @@
             "location": "/dynamic_cacheing_nginx_reverse_proxy_for_pacman/#systemd-timer-for-the-systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache",
             "text": "# /etc/systemd/system/proxy_cache_database_clean.timer\n[Unit]\nDescription=Timer for clean The pacman proxy cache database\n\n[Timer]\nOnBootSec=10min\nOnUnitActiveSec=15min\nUnit=proxy_cache_database_clean.service\n\n[Install]\nWantedBy=timers.target",
             "title": "systemd timer for the systemd service that deletes the pacman database files from the proxy cache"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/",
+            "text": "FreeBSD Jails on FreeNAS\n\n\nMostly a personal distillation for getting a FreeBSD\nJail up and running on FreeNAS.\n\n\nIn The FreeNAS WebGui, Create A New Jail\n\n\nThe default networking configuration, will give\nyour jail an ip address on the lan. For now, I've\ndecided to just share a pkg cache with each jail.\nNavigate to \nJails -> Storage -> Add Storage\n and\nadd the \npkg\n storage directory to \n/var/cache/pkg\n\ninside the jail.  \n\n\nFor instance, on my local FreeNAS server,\nthe pkg directory is at /mnt/VolumeOne/pkg/.\n\n\nIf you ssh into the host server, you can type the command\n\njls\n, to list the jails. Based on the output of the\ncommand \njls\n, you can get a shell with \njexec <jail number>\n\nof \njexec <jail hostname>\n.\n\n\nupdating\n\n\nHow about the command \npkg audit -F\n? Downloads a\nlist of known security issues and checks your system\nagainst that.\n\n\nI would recommend, to myself anyway, to shell into\nthe new jail with \njexec\n, run \npkg upgrade\n to install any new packages,\nand then from the FreeNAS webgui, restart the jail. Although\nthe restarted jail will have a new jail number as reported by\nthe \njls\n command.\n\n\nlocale\n\n\nWhen you use \njexec\n to get a shell, you get an environment\nwith an utf_8 locale. Not so if you ssh into the new jail.\nFor this put the following contents into ~/.login_conf\n\n\n# ~/.login_conf\nme:\\\n        :charset=UTF-8:\\\n        :lang=en_US.UTF-8:\\\n        :setenv=LC_COLLATE=C:\n\n\n\n\nssh\n\n\nTo get ssh running, edit \n/etc/rc.conf\n inside the jail.\n\n\n# /etc/rc.conf\nsshd_enable=\"YES\"\n\n\n\n\nTo start sshd immediately, make any necessary edits to\n/etc/ssh/sshd_config, and run the following command.\n\n\nservice sshd start\n\n\n\n\nByobu\n\n\nYou'll need newt to configure byobu, and if you don't install tmux\nthen screen will become the backend.\n\n\npkg install byobu tmux newt\n\n\n\n\nIf you execute \nbyobu-config\n, by pressing \nf9\n, the\nfollowing options seem to work. Some options, of course,\nwill prevent others from working so you have to enable them\none at a time to see what happens.\n\n\n\n\ndate\n\n\ndisk\n\n\ndistro\n\n\nhostname\n\n\nip address\n\n\nload_average\n\n\nlogo\n\n\ntime\n\n\nuptime\n\n\nusers\n\n\nwhoami\n\n\n\n\nvim\n\n\nVia pkg, there are two options: vim and vim-lite. Note vim will pull\nin a whole bunch of gui dependancies, but vim-lite is not build with python.\n\n\nFor instance, powerline will not work with vim-lite because it's not built with\npython. Also, vim-youcompleteme will not work with vim-lite. However, lightline\nwill work with vim-lite, and VimCompletesMe will work with vim-lite.\n\n\nTo get lightline working update $TERM\n\n\n# ~/.config/fish/config.fish\nexport TERM=xterm-256color\n\n\n\n\nAnd vimrc\n\n\n# ~/.vimrc\nset ls=2\n\n\n\n\nAnother option is to build vim from source via ports. You can prevent vim\nfrom pulling in a bunch of gui dependancies with the following in /etc/make.conf.\n\n\n# /etc/make.conf\nWITHOUT_X11=yes\n\n\n\n\nAnd then when you compile vim from ports, run \nmake config\n where you can enable\npython.\n\n\npython\n\n\nFor python3 virtualenv\n\n\nvirtualenv-3.6 <directory>",
+            "title": "FreeBSD Jails on FreeNAS"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#freebsd-jails-on-freenas",
+            "text": "Mostly a personal distillation for getting a FreeBSD\nJail up and running on FreeNAS.",
+            "title": "FreeBSD Jails on FreeNAS"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#in-the-freenas-webgui-create-a-new-jail",
+            "text": "The default networking configuration, will give\nyour jail an ip address on the lan. For now, I've\ndecided to just share a pkg cache with each jail.\nNavigate to  Jails -> Storage -> Add Storage  and\nadd the  pkg  storage directory to  /var/cache/pkg \ninside the jail.    For instance, on my local FreeNAS server,\nthe pkg directory is at /mnt/VolumeOne/pkg/.  If you ssh into the host server, you can type the command jls , to list the jails. Based on the output of the\ncommand  jls , you can get a shell with  jexec <jail number> \nof  jexec <jail hostname> .",
+            "title": "In The FreeNAS WebGui, Create A New Jail"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#updating",
+            "text": "How about the command  pkg audit -F ? Downloads a\nlist of known security issues and checks your system\nagainst that.  I would recommend, to myself anyway, to shell into\nthe new jail with  jexec , run  pkg upgrade  to install any new packages,\nand then from the FreeNAS webgui, restart the jail. Although\nthe restarted jail will have a new jail number as reported by\nthe  jls  command.",
+            "title": "updating"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#locale",
+            "text": "When you use  jexec  to get a shell, you get an environment\nwith an utf_8 locale. Not so if you ssh into the new jail.\nFor this put the following contents into ~/.login_conf  # ~/.login_conf\nme:\\\n        :charset=UTF-8:\\\n        :lang=en_US.UTF-8:\\\n        :setenv=LC_COLLATE=C:",
+            "title": "locale"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#ssh",
+            "text": "To get ssh running, edit  /etc/rc.conf  inside the jail.  # /etc/rc.conf\nsshd_enable=\"YES\"  To start sshd immediately, make any necessary edits to\n/etc/ssh/sshd_config, and run the following command.  service sshd start",
+            "title": "ssh"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#byobu",
+            "text": "You'll need newt to configure byobu, and if you don't install tmux\nthen screen will become the backend.  pkg install byobu tmux newt  If you execute  byobu-config , by pressing  f9 , the\nfollowing options seem to work. Some options, of course,\nwill prevent others from working so you have to enable them\none at a time to see what happens.   date  disk  distro  hostname  ip address  load_average  logo  time  uptime  users  whoami",
+            "title": "Byobu"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#vim",
+            "text": "Via pkg, there are two options: vim and vim-lite. Note vim will pull\nin a whole bunch of gui dependancies, but vim-lite is not build with python.  For instance, powerline will not work with vim-lite because it's not built with\npython. Also, vim-youcompleteme will not work with vim-lite. However, lightline\nwill work with vim-lite, and VimCompletesMe will work with vim-lite.  To get lightline working update $TERM  # ~/.config/fish/config.fish\nexport TERM=xterm-256color  And vimrc  # ~/.vimrc\nset ls=2  Another option is to build vim from source via ports. You can prevent vim\nfrom pulling in a bunch of gui dependancies with the following in /etc/make.conf.  # /etc/make.conf\nWITHOUT_X11=yes  And then when you compile vim from ports, run  make config  where you can enable\npython.",
+            "title": "vim"
+        },
+        {
+            "location": "/freebsd_jails_on_freenas/#python",
+            "text": "For python3 virtualenv  virtualenv-3.6 <directory>",
+            "title": "python"
         },
         {
             "location": "/arch_redis_nspawn/",
