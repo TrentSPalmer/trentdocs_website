@@ -94,6 +94,8 @@
         
             <li><a class="toctree-l3" href="#python">python</a></li>
         
+            <li><a class="toctree-l3" href="#running-gitit-under-the-supervision-of-supervisord">running gitit under the supervision of supervisord</a></li>
+        
         </ul>
     
 
@@ -244,6 +246,47 @@ python.</p>
 <h2 id="python">python</h2>
 <p>For python3 virtualenv</p>
 <pre><code class="csh">virtualenv-3.6 &lt;directory&gt;
+</code></pre>
+
+<h2 id="running-gitit-under-the-supervision-of-supervisord">running gitit under the supervision of supervisord</h2>
+<p>py27-supervisor and hs-gitit are available as pkg install, if you want to
+run a gitit wiki.</p>
+<p>gitit doesn't come with an init service. To generate a sample config,
+run <code>gitit --print-default-config &gt; gitit.conf</code>, and then if you want
+you can reference gitit.conf by passing gitit the <em>-f</em> flag.</p>
+<p>So for instance, after you install supervisord, add something like the
+following to the end of <code>/usr/local/etc/supervisord.conf</code>, and create
+the directory <code>/var/log/supervisor/</code>.</p>
+<pre><code class="conf">[program:gitit]
+user=&lt;user&gt;
+directory=/path/to/wikidata/directory/
+command=/usr/local/bin/gitit -f /usr/local/etc/gitit.conf
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+autorestart=true
+</code></pre>
+
+<p>supervisord is a service you can enable in
+<code>/etc/rc.conf</code></p>
+<pre><code class="conf"># /etc/rc.conf
+supervisord_enable=&quot;YES&quot;
+</code></pre>
+
+<p>and then start with <code>service supervisord start</code>
+when you get supervisord running, you can start a
+supervisorctl shell, i.e.</p>
+<pre><code class="sh">supervisorctl
+supervisor&gt; status
+# outputs
+gitit                            RUNNING   pid 98057, uptime 0:32:27
+supervisor&gt; start/restart/stop gitit
+supervisor&gt; exit
+</code></pre>
+
+<p>But there is one other little detail, in that when you try to
+run gitit as a daemon like this, on FreeBSD it will fail because it can't
+find git. But the symlink solution is easy enough.</p>
+<pre><code class="csh">ln -s /usr/local/bin/git /usr/bin/
 </code></pre>
               
             </div>

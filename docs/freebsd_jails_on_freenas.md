@@ -127,3 +127,54 @@ For python3 virtualenv
 ```csh
 virtualenv-3.6 <directory>
 ```
+
+## running gitit under the supervision of supervisord
+py27-supervisor and hs-gitit are available as pkg install, if you want to
+run a gitit wiki.
+
+gitit doesn't come with an init service. To generate a sample config,
+run `gitit --print-default-config > gitit.conf`, and then if you want
+you can reference gitit.conf by passing gitit the *-f* flag.
+
+So for instance, after you install supervisord, add something like the
+following to the end of `/usr/local/etc/supervisord.conf`, and create
+the directory `/var/log/supervisor/`.
+
+```conf
+[program:gitit]
+user=<user>
+directory=/path/to/wikidata/directory/
+command=/usr/local/bin/gitit -f /usr/local/etc/gitit.conf
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+autorestart=true
+```
+
+supervisord is a service you can enable in
+`/etc/rc.conf`
+
+```conf
+# /etc/rc.conf
+supervisord_enable="YES"
+```
+
+and then start with `service supervisord start`
+when you get supervisord running, you can start a
+supervisorctl shell, i.e.
+
+```sh
+supervisorctl
+supervisor> status
+# outputs
+gitit                            RUNNING   pid 98057, uptime 0:32:27
+supervisor> start/restart/stop gitit
+supervisor> exit
+```
+
+But there is one other little detail, in that when you try to
+run gitit as a daemon like this, on FreeBSD it will fail because it can't
+find git. But the symlink solution is easy enough.
+
+```csh
+ln -s /usr/local/bin/git /usr/bin/
+```
