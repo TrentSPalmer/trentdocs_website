@@ -288,6 +288,31 @@ run gitit as a daemon like this, on FreeBSD it will fail because it can't
 find git. But the symlink solution is easy enough.</p>
 <pre><code class="csh">ln -s /usr/local/bin/git /usr/bin/
 </code></pre>
+
+<p>And you might as well stick a reverse proxy in front of it. Assuming
+you configure gitit listen only on localhost:5001, install nginx.
+<code>pkg install nginx</code></p>
+<p>enable nginx in /etc/rc.conf</p>
+<pre><code class="conf">nginx_enable=&quot;YES&quot;
+</code></pre>
+
+<p>Then, in the file <code>/usr/local/etc/nginx/nginx.conf</code> change the location "<em>/</em>"
+so that it looks like this.</p>
+<pre><code class="nginx">{
+.....
+        location / {
+            # root   /usr/local/www/nginx;
+            # index  index.html index.htm;
+                proxy_pass http://127.0.0.1:5001;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+....
+}
+</code></pre>
+
+<p>and then start nginx <code>service nginx start</code></p>
               
             </div>
           </div>

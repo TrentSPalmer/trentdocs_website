@@ -178,3 +178,33 @@ find git. But the symlink solution is easy enough.
 ```csh
 ln -s /usr/local/bin/git /usr/bin/
 ```
+
+And you might as well stick a reverse proxy in front of it. Assuming
+you configure gitit listen only on localhost:5001, install nginx.
+`pkg install nginx`
+
+enable nginx in /etc/rc.conf
+
+```conf
+nginx_enable="YES"
+```
+
+Then, in the file `/usr/local/etc/nginx/nginx.conf` change the location "*/*"
+so that it looks like this.
+
+```nginx
+{
+.....
+        location / {
+            # root   /usr/local/www/nginx;
+            # index  index.html index.htm;
+                proxy_pass http://127.0.0.1:5001;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+....
+}
+```
+
+and then start nginx `service nginx start`
