@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>LXD Container Home Server Networking For Dummies - Trent Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "LXD Container Home Server Networking For Dummies";
+    var mkdocs_page_input_path = "lxd_container_home_server_networking_for_dummies.md";
+    var mkdocs_page_url = "/lxd_container_home_server_networking_for_dummies/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Trent Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">LXD Container Home Server Networking For Dummies</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#lxd-container-home-server-networking-for-dummies">LXD Container Home Server Networking For Dummies</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#why">Why?</a></li>
+        
+            <li><a class="toctree-l3" href="#three-part-overview">Three Part Overview.</a></li>
+        
+            <li><a class="toctree-l3" href="#build-sum-moar-bridges">Build Sum Moar Bridges</a></li>
+        
+            <li><a class="toctree-l3" href="#profiles">Profiles</a></li>
+        
+            <li><a class="toctree-l3" href="#assign-containers-to-profiles-and-configure-them-to-connect-correctly">Assign Containers to Profiles and configure them to connect correctly.</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../serve_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../nspawn/">Nspawn</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mastodon_on_arch/">Mastodon on Arch</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/">Debian Nspawn Container On Arch For Testing Apache Configurations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../freebsd_jails_on_freenas/">FreeBSD Jails on FreeNAS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../self_signed_certs/">Self Signed Certs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Trent Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>LXD Container Home Server Networking For Dummies</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lxd-container-home-server-networking-for-dummies">LXD Container Home Server Networking For Dummies</h1>
+<h2 id="why">Why?</h2>
+<p>If you're going to operate a fleet of LXD containers for home
+entertainment, you probably want some of them exposed with their
+own ip addresses on your home network, so that you can use them
+as containerized servers for various applications.</p>
+<p>Others containers, you might want to be inaccessable from the lan,
+in a natted subnet, where they can solicit connections to the
+outside world from within their natted subnet, but are not addressable
+from the outside. A database server that you connect a web app to, for
+instance, or a web app that you have a reverse proxy in front of.</p>
+<p>But these are two separate address spaces, so ideally all of the containers
+would have a second interface of their own, by which they could connect
+to a third network, that would be a private network that all of the containers
+can use to talk directly to each other (or the host machine).</p>
+<p>It's pretty straightforward, you just have to glue all the pieces together.</p>
+<h2 id="three-part-overview">Three Part Overview.</h2>
+<ol>
+<li>
+<p>Define and create some bridges.  </p>
+</li>
+<li>
+<p>Define profiles that combine the network
+interfaces in different combinations. In addition to two
+bridges you will have a macvlan with which to expose the containers
+that you want exposed, but the macvlan doesn't come into
+play until here in step two when you define profiles.  </p>
+</li>
+<li>
+<p>Assign each container which profile it should use,
+and then configure the containers to use the included
+network interfaces correctly.  </p>
+</li>
+</ol>
+<h2 id="build-sum-moar-bridges">Build Sum Moar Bridges</h2>
+<p>The containers will all have two network interfaces from
+their own internal point of view, <em>eth0</em> and <em>eth1</em>. </p>
+<p>In this
+scheme we create a bridge for a natted subnet and a bridge for
+a non-natted subnet. All of the containers will connect to the
+non-natted subnet on their second interface, <em>eth1</em>, and some
+of the containers will connect to the natted subnet on their 
+first interface <em>eth0</em>. The containers that don't connect
+to the natted subnet will instead connect to a macvlan
+on their first interface <em>eth0</em>, but that isn't part of this
+step.</p>
+<h3 id="bridge-for-a-natted-subnet">bridge for a natted subnet</h3>
+<p>If you haven't used lxd before, you'll want to run the command <code>lxd init</code>.
+By default this creates exactly the bridge we want, called <em>lxdbr0</em>.</p>
+<p>Otherwise you would use the following command to create <em>lxdbr0</em>.</p>
+<pre><code class="bash">lxc network create lxdbr0
+</code></pre>
+
+<p>To generate a table of all the existing interfaces.</p>
+<pre><code class="bash">lxd network list
+</code></pre>
+
+<p>This bridge is for our natted subnet, so we just want to go with
+the default configuration.</p>
+<pre><code class="bash">lxc network show lxdbr0
+</code></pre>
+
+<p>This cats a yaml file where you can see the randomly
+generated network for <em>lxdbr0</em>.</p>
+<pre><code class="yaml">config:
+  ipv4.address: 10.99.153.1/24
+  ipv4.nat: &quot;true&quot;
+  ipv6.address: fd42:211e:e008:954b::1/64
+  ipv6.nat: &quot;true&quot;
+description: &quot;&quot;
+name: lxdbr0
+type: bridge
+used_by: []
+managed: true
+</code></pre>
+
+<h3 id="bridge-for-a-non-natted-subnet">bridge for a non-natted subnet</h3>
+<p>Create <em>lxdbr1</em></p>
+<pre><code class="bash">lxc network create lxdbr1
+</code></pre>
+
+<p>Use the following commands to remove nat from 
+lxdbr1.</p>
+<pre><code class="bash">lxc network set lxdbr1 ipv4.nat false
+lxc network set lxdbr1 ipv6.nat false
+</code></pre>
+
+<p>Of if you use this next command, your favourite
+text editor will pop open, preloaded with the complete yaml file
+and you can edit the configuration there.</p>
+<pre><code class="bash">lxc network edit lxdbr1
+</code></pre>
+
+<p>Either way you're looking for a result such as the following.
+Notice that the randomly generated address space is different
+that the one for <em>lxdbr0</em>, and that the *nat keys are set
+to "false".</p>
+<pre><code class="yaml">config:
+  ipv4.address: 10.151.18.1/24
+  ipv4.nat: &quot;false&quot;
+  ipv6.address: fd42:89d4:f465:1b20::1/64
+  ipv6.nat: &quot;false&quot;
+description: &quot;&quot;
+name: lxdbr1
+type: bridge
+used_by: []
+managed: true
+</code></pre>
+
+<h2 id="profiles">Profiles</h2>
+<h3 id="recycle-the-default">recycle the default</h3>
+<p>When you first ran <code>lxd init</code>, that created a default profile.
+Confirm with the following.</p>
+<pre><code class="bash">lxc profile list
+</code></pre>
+
+<p>To see what the default profile looks like.</p>
+<pre><code class="bash">lxc profile show default
+</code></pre>
+
+<pre><code class="yaml">config:
+  environment.http_proxy: &quot;&quot;
+  security.privileged: &quot;true&quot;
+  user.network_mode: &quot;&quot;
+description: Default LXD profile
+devices:
+  eth0:
+    nictype: bridged
+    parent: lxdbr0
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+name: default
+used_by: []
+</code></pre>
+
+<h3 id="profile-the-natted">profile the natted</h3>
+<p>The easiest way to create a new profile is start by copying another one.</p>
+<pre><code class="bash">lxc profile copy default natted
+</code></pre>
+
+<p>edit the new <em>natted</em> profile</p>
+<pre><code class="bash">lxc profile edit natted
+</code></pre>
+
+<p>And add an <em>eth1</em> interface attached to <em>lxdbr1</em>. <em>eth0</em> and <em>eth1</em> will
+be the interfaces visible from the container's point of view.</p>
+<pre><code class="yaml">config:
+  environment.http_proxy: &quot;&quot;
+  security.privileged: &quot;true&quot;
+  user.network_mode: &quot;&quot;
+description: Natted LXD profile
+devices:
+  eth0:
+    nictype: bridged
+    parent: lxdbr0
+    type: nic
+  eth1:
+    nictype: bridged
+    parent: lxdbr1
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+name: natted
+used_by: []
+</code></pre>
+
+<p>Any container assigned to the <em>natted</em> profile, will have an interface <em>eth0</em> connected
+to a natted subnet, and a second interface <em>eth1</em> connected to a non-natted subnet, with
+a static ip on which it will be able to talk directly to the other containers and the host
+machine.</p>
+<h3 id="profile-the-exposed">profile the exposed</h3>
+<p>Create the <em>exposed</em> profile</p>
+<pre><code class="bash">lxc profile copy natted exposed
+</code></pre>
+
+<p>and edit the new <em>exposed</em> profile</p>
+<pre><code class="bash">lxc profile edit exposed
+</code></pre>
+
+<p>change the nictype for <em>eth0</em> from <code>bridged</code> to <code>macvlan</code>, and the parent should be
+the name of the physical ethernet connection on the host machine, instead of a bridge.</p>
+<pre><code class="yaml">config:
+  environment.http_proxy: &quot;&quot;
+  security.privileged: &quot;true&quot;
+  user.network_mode: &quot;&quot;
+description: Exposed LXD profile
+devices:
+  eth0:
+    nictype: macvlan
+    parent: eno1
+    type: nic
+  eth1:
+    nictype: bridged
+    parent: lxdbr1
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+name: exposed
+used_by: []
+</code></pre>
+
+<p>Any container assigned to the <em>exposed</em> profile, will have an interface <em>eth0</em> connected
+to a macvlan, addressable from your lan, just like any other arbitrary computer on
+your home network, and a second interface <em>eth1</em> connected to a non-natted subnet, with
+a static ip on which it will be able to talk directly to the other containers and the host
+machine.</p>
+<h2 id="assign-containers-to-profiles-and-configure-them-to-connect-correctly">Assign Containers to Profiles and configure them to connect correctly.</h2>
+<p>There are a lot of different ways that a Linux instance can solicit network services. So for
+now I will just describe a method that will work here for a lxc container from ubuntu:16.04, as
+well as a debian stretch container from images.linuxcontainers.org.</p>
+<p>Start a new container and assign the profile. We'll use an arbitrary whimsical container name,
+<em>quick-joey</em>. This process is the same for either the <em>natted</em> profile or the <em>exposed</em> profile.</p>
+<pre><code class="bash">lxc init ubuntu:16.04 quick-joey
+# assign the profile
+lxc profile assign quick-joey exposed
+# start quick-joey
+lxc start quick-joey
+# and start a bash shell
+lxc exec quick-joey bash
+</code></pre>
+
+<p>You need to tell these containers how to connect to the non-natted subnet on <em>eth1</em>
+With either an ubuntu:16.04 container, or a debian stretch container, for either the <em>natted</em> or
+<em>exposed</em> profile, because of all the above configuration work they will automatically connect on
+their <em>eth0</em> interfaces and be able to talk to the internet. You need to edit <code>/etc/network/interfaces</code>,
+the main difference being what that file looks like before you edit it.</p>
+<h3 id="ubuntu1604">ubuntu:16.04</h3>
+<p>If you start a shell on an ubuntu:16.04 container, you see that <code>/etc/network/interfaces</code>
+describes the loopback device for localhost, then sources <code>/etc/network/interfaces.d/*.cfg</code> where
+some magical cloud-config jazz is going on. You just want to add a static ip description for <em>eth1</em>
+to the file <code>/etc/network/interfaces</code>. And obviously take that the static ip address you assign is
+unique and on the same subnet with <em>lxdbr1</em>.</p>
+<p>Reminder: the address for <em>lxdbr1</em> is 10.151.18.1/24, but it will be different on your machine.</p>
+<pre><code class="conf">auto lo
+iface lo inet loopback
+
+source /etc/network/interfaces.d/*.cfg
+# what you add goes below here
+auto eth1
+iface eth1 inet static
+   address 10.151.18.123
+   netmask 255.255.255.0
+   broadcast 255.255.255.255 
+   network 10.151.18.0
+</code></pre>
+
+<h3 id="debian-stretch">debian stretch</h3>
+<p>The configuration for a debian stretch container is the same, except the the file
+<code>/etc/network/interfaces</code> will also describe eth0, but you only have to add the 
+description for eth1.</p>
+<h3 id="the-etchosts-file">the /etc/hosts file</h3>
+<p>Once you assign the containers static ip addresses for their <em>eth1</em>
+interfaces, you can use the <code>/etc/hosts</code> file on each container to make them
+aware of where the other containers and the host machine are.</p>
+<p>For instance, if you want the container <em>quick-joey</em> to talk directly
+to the host machine, which will be at the ip address of <em>lxdbr1</em>, start a shell
+on the container <em>quick-joey</em></p>
+<pre><code class="bash">lxc exec quick-joey bash
+</code></pre>
+
+<p>and edit <code>/etc/hosts</code></p>
+<pre><code class="conf"># /etc/hosts
+10.151.18.1    mothership
+</code></pre>
+
+<p>Of you have a container named <em>fat-cinderella</em>, that needs to be able to talk
+directly <em>quick-joey</em>.</p>
+<pre><code class="bash">lxc exec fat-cinderella bash
+vim /etc/hosts
+</code></pre>
+
+<pre><code class="conf"># /etc/hosts
+10.151.18.123  quick-joey
+</code></pre>
+
+<p>etcetera</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../serve_and_share_apps_from_your_phone_with_fdroid/" class="btn btn-neutral float-right" title="Serve And Share Apps From Your Phone With Fdroid">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../serve_and_share_apps_from_your_phone_with_fdroid/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
