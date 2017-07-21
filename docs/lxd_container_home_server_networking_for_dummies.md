@@ -275,21 +275,22 @@ lxc start quick-joey
 lxc exec quick-joey bash
 ```
 
-You need to tell these containers how to connect to the non-natted subnet on *eth1*
 With either an ubuntu:16.04 container, or a debian stretch container, for either the *natted* or
 *exposed* profile, because of all the above configuration work they will automatically connect on
 their *eth0* interfaces and be able to talk to the internet. You need to edit `/etc/network/interfaces`,
 the main difference being what that file looks like before you edit it.
+
+You need to tell these containers how to connect to the non-natted subnet on *eth1*.
 
 ### ubuntu:16.04
 
 If you start a shell on an ubuntu:16.04 container, you see that `/etc/network/interfaces`
 describes the loopback device for localhost, then sources `/etc/network/interfaces.d/*.cfg` where
 some magical cloud-config jazz is going on. You just want to add a static ip description for *eth1*
-to the file `/etc/network/interfaces`. And obviously take that the static ip address you assign is
+to the file `/etc/network/interfaces`. And obviously take care that the static ip address you assign is
 unique and on the same subnet with *lxdbr1*.
 
-Reminder: the address for *lxdbr1* is 10.151.18.1/24, but it will be different on your machine.
+Reminder: the address for *lxdbr1* is 10.151.18.1/24, (but it will be different on your machine).
 
 ```conf
 auto lo
@@ -332,7 +333,7 @@ and edit `/etc/hosts`
 10.151.18.1    mothership
 ```
 
-Of you have a container named *fat-cinderella*, that needs to be able to talk
+Or you have a container named *fat-cinderella*, that needs to be able to talk
 directly *quick-joey*.
 
 ```bash
