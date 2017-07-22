@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nLXD Container Home Server Networking For Dummies\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nSelf Signed Certs",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nLXD Container Home Server Networking For Dummies\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nSelf Signed Certs",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Serve And Share Apps From Your Phone With Fdroid  LXD Container Home Server Networking For Dummies  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Self Signed Certs",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Serve And Share Apps From Your Phone With Fdroid  LXD Container Home Server Networking For Dummies  How To Reassign A Static Ip Address with dnsmasq  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Self Signed Certs",
             "title": "Git Repo For These Docs"
         },
         {
@@ -89,6 +89,16 @@
             "location": "/lxd_container_home_server_networking_for_dummies/#the-etchosts-file",
             "text": "Once you assign the containers static ip addresses for their  eth1 \ninterfaces, you can use the  /etc/hosts  file on each container to make them\naware of where the other containers and the host machine are.  For instance, if you want the container  quick-joey  to talk directly\nto the host machine, which will be at the ip address of  lxdbr1 , start a shell\non the container  quick-joey  lxc exec quick-joey bash  and edit  /etc/hosts  # /etc/hosts\n10.151.18.1    mothership  Or you have a container named  fat-cinderella , that needs to be able to talk\ndirectly  quick-joey .  lxc exec fat-cinderella bash\nvim /etc/hosts  # /etc/hosts\n10.151.18.123  quick-joey  etcetera",
             "title": "the /etc/hosts file"
+        },
+        {
+            "location": "/how_to_reassign_a_static_ip_address_with_dnsmasq/",
+            "text": "How To Reassign a Static ip address with dnsmasq\n\n\nOn your router you can assign static ip addresses for various machines\nin your network, by writing the reservations in the file \n/etc/dnsmasq.conf\n.\n\n\nThese will be in the form as below.\n\n\ndhcp-host=<mac address>,<ip address>\n\n\nSo here's how you transfer an existing static ip address assignment to\na new client machine. Begin by editting the file \n/etc/dnsmasq.conf\n on\nyour router, and update the mac address associated with the intended\nip address.\n\n\nNext, temporarily stop dnsmasq.\n\n\nsystemctl stop dnsmasq\n\n\n\n\nNext shutdown networking on the new client machine. Shutting the machine down might work,\nor the command \ndhclient -v -r\n might get the job done (you will lose the connection).\n\n\nNow on the router, edit the file \n/var/lib/misc/dnsmasq.leases\n, and delete the pre-existing\nlease for the old client machine that will no longer exist.\n\n\nRestart dnsmasq on the router,\n\nand then restart networking on the new client machine.",
+            "title": "How To Reassign A Static Ip Address with dnsmasq"
+        },
+        {
+            "location": "/how_to_reassign_a_static_ip_address_with_dnsmasq/#how-to-reassign-a-static-ip-address-with-dnsmasq",
+            "text": "On your router you can assign static ip addresses for various machines\nin your network, by writing the reservations in the file  /etc/dnsmasq.conf .  These will be in the form as below.  dhcp-host=<mac address>,<ip address>  So here's how you transfer an existing static ip address assignment to\na new client machine. Begin by editting the file  /etc/dnsmasq.conf  on\nyour router, and update the mac address associated with the intended\nip address.  Next, temporarily stop dnsmasq.  systemctl stop dnsmasq  Next shutdown networking on the new client machine. Shutting the machine down might work,\nor the command  dhclient -v -r  might get the job done (you will lose the connection).  Now on the router, edit the file  /var/lib/misc/dnsmasq.leases , and delete the pre-existing\nlease for the old client machine that will no longer exist.  Restart dnsmasq on the router, \nand then restart networking on the new client machine.",
+            "title": "How To Reassign a Static ip address with dnsmasq"
         },
         {
             "location": "/serve_and_share_apps_from_your_phone_with_fdroid/",

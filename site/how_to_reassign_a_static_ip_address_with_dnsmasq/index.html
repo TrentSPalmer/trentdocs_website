@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Quick Dirty Redis Nspawn Container on Arch Linux - Trent Docs</title>
+  <title>How To Reassign A Static Ip Address with dnsmasq - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Quick Dirty Redis Nspawn Container on Arch Linux";
-    var mkdocs_page_input_path = "arch_redis_nspawn.md";
-    var mkdocs_page_url = "/arch_redis_nspawn/";
+    var mkdocs_page_name = "How To Reassign A Static Ip Address with dnsmasq";
+    var mkdocs_page_input_path = "how_to_reassign_a_static_ip_address_with_dnsmasq.md";
+    var mkdocs_page_url = "/how_to_reassign_a_static_ip_address_with_dnsmasq/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -57,9 +57,15 @@
     <a class="" href="../lxd_container_home_server_networking_for_dummies/">LXD Container Home Server Networking For Dummies</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../how_to_reassign_a_static_ip_address_with_dnsmasq/">How To Reassign A Static Ip Address with dnsmasq</a>
+    <a class="current" href="./">How To Reassign A Static Ip Address with dnsmasq</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</a></li>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -92,15 +98,9 @@
     <a class="" href="../freebsd_jails_on_freenas/">FreeBSD Jails on FreeNAS</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Quick Dirty Redis Nspawn Container on Arch Linux</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#quick-dirty-redis-nspawn-container-on-arch-linux">Quick Dirty Redis Nspawn Container on Arch Linux</a></li>
-    
-
-    </ul>
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -135,7 +135,7 @@
     
       
     
-    <li>Quick Dirty Redis Nspawn Container on Arch Linux</li>
+    <li>How To Reassign A Static Ip Address with dnsmasq</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -145,18 +145,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="quick-dirty-redis-nspawn-container-on-arch-linux">Quick Dirty Redis Nspawn Container on Arch Linux</h1>
-<p>Refer to the <a href="../nspawn/">Nspawn</a> page for setting up the nspawn container,
-install redis, and start/enable redis.service.
-Once you have the container running, it seems all you have to do to get
-things working in a container subnet is to change the bind address.</p>
-<pre><code class="text"># /etc/redis.conf
-# bind 127.0.0.1
-bind 0.0.0.0
+                <h1 id="how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</h1>
+<p>On your router you can assign static ip addresses for various machines
+in your network, by writing the reservations in the file <code>/etc/dnsmasq.conf</code>.</p>
+<p>These will be in the form as below.</p>
+<p><code>dhcp-host=&lt;mac address&gt;,&lt;ip address&gt;</code></p>
+<p>So here's how you transfer an existing static ip address assignment to
+a new client machine. Begin by editting the file <code>/etc/dnsmasq.conf</code> on
+your router, and update the mac address associated with the intended
+ip address.</p>
+<p>Next, temporarily stop dnsmasq.</p>
+<pre><code class="bash">systemctl stop dnsmasq
 </code></pre>
 
-<p>you can nmap port 6379, be sure to restart redis</p>
-<p><a href="https://wiki.archlinux.org/index.php/Redis">Again I would refer you to the Arch Wiki</a></p>
+<p>Next shutdown networking on the new client machine. Shutting the machine down might work,
+or the command <code>dhclient -v -r</code> might get the job done (you will lose the connection).</p>
+<p>Now on the router, edit the file <code>/var/lib/misc/dnsmasq.leases</code>, and delete the pre-existing
+lease for the old client machine that will no longer exist.</p>
+<p>Restart dnsmasq on the router,<br />
+and then restart networking on the new client machine.</p>
               
             </div>
           </div>
@@ -164,10 +171,10 @@ bind 0.0.0.0
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../arch_postgresql_nspawn/" class="btn btn-neutral float-right" title="Quick Dirty Postgresql Nspawn Container on Arch Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../serve_and_share_apps_from_your_phone_with_fdroid/" class="btn btn-neutral float-right" title="Serve And Share Apps From Your Phone With Fdroid">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../freebsd_jails_on_freenas/" class="btn btn-neutral" title="FreeBSD Jails on FreeNAS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lxd_container_home_server_networking_for_dummies/" class="btn btn-neutral" title="LXD Container Home Server Networking For Dummies"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -193,10 +200,10 @@ bind 0.0.0.0
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../freebsd_jails_on_freenas/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../lxd_container_home_server_networking_for_dummies/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../arch_postgresql_nspawn/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../serve_and_share_apps_from_your_phone_with_fdroid/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
