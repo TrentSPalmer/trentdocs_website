@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Apt Pinning Artful Aardvark Packages in Xenial Xerus - Trent Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Apt Pinning Artful Aardvark Packages in Xenial Xerus";
+    var mkdocs_page_input_path = "apt_pinning_artful_aardvark_packages_in_xenial_xerus.md";
+    var mkdocs_page_url = "/apt_pinning_artful_aardvark_packages_in_xenial_xerus/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Trent Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Apt Pinning Artful Aardvark Packages in Xenial Xerus</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#apt-pinning-artful-aardvark-packages-in-xenial-xerus">Apt Pinning Artful Aardvark Packages in Xenial Xerus</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../lxd_container_home_server_networking_for_dummies/">LXD Container Home Server Networking For Dummies</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../how_to_reassign_a_static_ip_address_with_dnsmasq/">How To Reassign A Static Ip Address with dnsmasq</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../serve_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../nspawn/">Nspawn</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mastodon_on_arch/">Mastodon on Arch</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/">Debian Nspawn Container On Arch For Testing Apache Configurations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../freebsd_jails_on_freenas/">FreeBSD Jails on FreeNAS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../self_signed_certs/">Self Signed Certs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Trent Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Apt Pinning Artful Aardvark Packages in Xenial Xerus</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="apt-pinning-artful-aardvark-packages-in-xenial-xerus">Apt Pinning Artful Aardvark Packages in Xenial Xerus</h1>
+<p>You want to set up apt-pinning so that you can explicitly install packages from
+<em>artful</em>, on your <em>xenial</em> machine, but you also want to be able to issue the command
+<code>apt-get dist-upgrade</code> and have nothing automatically upgrade from <em>xenial</em> to <em>artful</em>.</p>
+<p>In order to get this to work you have to edit three files. The first file is
+<code>/etc/apt/sources.list</code>. Make a double length version of the file, with the second
+half of the file describing the <em>artful</em> equivalent of the <em>xenial</em> repos.
+Like this.</p>
+<pre><code class="conf"># /etc/apt/sources.list
+deb http://archive.ubuntu.com/ubuntu xenial main restricted
+deb-src http://archive.ubuntu.com/ubuntu xenial main restricted
+
+deb http://archive.ubuntu.com/ubuntu xenial-updates main restricted
+deb-src http://archive.ubuntu.com/ubuntu xenial-updates main restricted
+
+deb http://archive.ubuntu.com/ubuntu xenial universe
+deb-src http://archive.ubuntu.com/ubuntu xenial universe
+deb http://archive.ubuntu.com/ubuntu xenial-updates universe
+deb-src http://archive.ubuntu.com/ubuntu xenial-updates universe
+
+deb http://archive.ubuntu.com/ubuntu xenial multiverse
+deb-src http://archive.ubuntu.com/ubuntu xenial multiverse
+deb http://archive.ubuntu.com/ubuntu xenial-updates multiverse
+deb-src http://archive.ubuntu.com/ubuntu xenial-updates multiverse
+
+deb http://archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+
+deb http://security.ubuntu.com/ubuntu xenial-security main restricted
+deb-src http://security.ubuntu.com/ubuntu xenial-security main restricted
+deb http://security.ubuntu.com/ubuntu xenial-security universe
+deb-src http://security.ubuntu.com/ubuntu xenial-security universe
+deb http://security.ubuntu.com/ubuntu xenial-security multiverse
+deb-src http://security.ubuntu.com/ubuntu xenial-security multiverse
+
+## Uncomment the following two lines to add software from Canonical's
+## 'partner' repository.
+## This software is not part of Ubuntu, but is offered by Canonical and the
+## respective vendors as a service to Ubuntu users.
+# deb http://archive.canonical.com/ubuntu xenial partner
+# deb-src http://archive.canonical.com/ubuntu xenial partner
+
+deb http://archive.ubuntu.com/ubuntu artful main restricted
+deb-src http://archive.ubuntu.com/ubuntu artful main restricted
+
+deb http://archive.ubuntu.com/ubuntu artful-updates main restricted
+deb-src http://archive.ubuntu.com/ubuntu artful-updates main restricted
+
+deb http://archive.ubuntu.com/ubuntu artful universe
+deb-src http://archive.ubuntu.com/ubuntu artful universe
+deb http://archive.ubuntu.com/ubuntu artful-updates universe
+deb-src http://archive.ubuntu.com/ubuntu artful-updates universe
+
+deb http://archive.ubuntu.com/ubuntu artful multiverse
+deb-src http://archive.ubuntu.com/ubuntu artful multiverse
+deb http://archive.ubuntu.com/ubuntu artful-updates multiverse
+deb-src http://archive.ubuntu.com/ubuntu artful-updates multiverse
+
+deb http://archive.ubuntu.com/ubuntu artful-backports main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu artful-backports main restricted universe multiverse
+
+deb http://security.ubuntu.com/ubuntu artful-security main restricted
+deb-src http://security.ubuntu.com/ubuntu artful-security main restricted
+deb http://security.ubuntu.com/ubuntu artful-security universe
+deb-src http://security.ubuntu.com/ubuntu artful-security universe
+deb http://security.ubuntu.com/ubuntu artful-security multiverse
+</code></pre>
+
+<p>Now create a new file <code>/etc/apt/preferences.d/xenial</code> with the
+following content.</p>
+<pre><code class="conf">Package: *
+Pin: release a=xenial
+Pin-Priority: 900
+</code></pre>
+
+<p>And create one more file <code>/etc/apt/preferences.d/artful</code> with the
+following content.</p>
+<pre><code class="conf">Package: *
+Pin: release a=artful
+Pin-Priority: 300
+</code></pre>
+
+<p>Actually, I'm not entirely certain these are the optimal apt-pinning
+priority numbers. There's a little bit of art to apt-pinning.</p>
+<p>So you can verify that nothing will automatically upgrade with the
+following command.</p>
+<pre><code class="bash"># the result of this command should be that nothing upgrades
+apt-get dist-upgrade
+</code></pre>
+
+<p>But let's suppose that you want to explicitly install a package, and
+hopefully the upgraded dependancies which it needs from <em>artful</em>.
+<code>apt-cache madison</code> is a useful command.</p>
+<pre><code class="bash">apt-cache madison weather-util
+# outputs the following
+weather-util |      2.3-2 | http://archive.ubuntu.com/ubuntu artful/universe amd64 Packages
+weather-util |      2.0-1 | http://archive.ubuntu.com/ubuntu xenial/universe amd64 Packages
+weather-util |      2.0-1 | http://archive.ubuntu.com/ubuntu xenial/universe Sources
+weather-util |      2.3-2 | http://archive.ubuntu.com/ubuntu artful/universe Sources
+</code></pre>
+
+<p>As you can see, two different version of <em>weather-util</em> are available (as
+well as two different source versions), one each from the <em>xenial</em>,
+and the <em>artful</em> repos.</p>
+<p>But if you type <code>apt-get install weather-util</code>, the old version from the <em>xenial</em>
+repo will be installed. The intended behaviour is entirely a matter of getting
+the apt-pinning priority numbers correct.</p>
+<p>To explicitly install the newer version of <em>weather-util</em>, and perhaps more
+importantly it's upgraded <em>weather-util-data</em> dependancy, use the following command.</p>
+<pre><code class="bash">apt-get -t artful install weather-util
+</code></pre>
+
+<p>But hold on, HOLD ON! The above command doesn't actually confirm what version is
+going to be installed, and you'd like to have one last look things over, so add
+the <code>-V</code> flag to your <code>apt-get</code> command.</p>
+<pre><code class="bash">root@xhost:~# apt-get -t artful install weather-util -V
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  weather-util-data (2.3-2)
+The following NEW packages will be installed:
+  weather-util (2.3-2)
+     weather-util-data (2.3-2)
+     0 upgraded, 2 newly installed, 0 to remove and 389 not upgraded.
+     Need to get 0 B/3375 kB of archives.
+     After this operation, 3557 kB of additional disk space will be used.
+     Do you want to continue? [Y/n] 
+</code></pre>
+
+<p>That's what you're looking for.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../lxd_container_home_server_networking_for_dummies/" class="btn btn-neutral float-right" title="LXD Container Home Server Networking For Dummies">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../lxd_container_home_server_networking_for_dummies/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
