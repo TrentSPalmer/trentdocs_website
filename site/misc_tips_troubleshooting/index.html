@@ -170,6 +170,19 @@
     do lxc exec &quot;${machine}&quot; -- bash -c &quot;cat /etc/apt/apt.conf.d/02*&quot; ; done
 </code></pre>
 
+<p>fish shell is actually a little bit cleaner</p>
+<pre><code class="fish">for machine in (lxc list | grep RUNNING | awk '{print $2}') ; \
+    lxc exec $machine -- bash -c &quot;cat /etc/apt/apt.conf.d/02*&quot; ; end
+</code></pre>
+
+<pre><code class="fish"># change all their time zones
+for machine in (lxc list | grep RUNNING | awk '{print $2}') ; \
+    lxc exec $machine -- bash -c &quot;timedatectl set-timezone America/Los_Angeles&quot; ; end
+# check to see if anyone is logged in before rebooting
+for machine in (lxc list | grep RUNNING | awk '{print $2}') ; echo ; \
+    echo $machine ; lxc exec $machine -- bash -c &quot;who&quot; ; end 
+</code></pre>
+
 <h2 id="ubuntu-mate-welcome-center-doesnt-work-some-for-some-repos">Ubuntu-Mate-Welcome-Center doesn't work some for some repos</h2>
 <p>Perhaps your apt-cacher-ng proxy server isn't configured to allow 
 traffic through from https sources. Make sure the following is

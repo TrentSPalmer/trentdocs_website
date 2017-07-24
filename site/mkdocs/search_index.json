@@ -432,7 +432,7 @@
         },
         {
             "location": "/misc_tips_troubleshooting/",
-            "text": "Misc Tips, TroubleShooting\n\n\nSending commands to LXD containers\n\n\nUse \nbash -c \"<command>\"\n for commands with wildcards. i.e.\n\n\nfor machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\\\n    do lxc exec \"${machine}\" -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; done\n\n\n\n\nUbuntu-Mate-Welcome-Center doesn't work some for some repos\n\n\nPerhaps your apt-cacher-ng proxy server isn't configured to allow \ntraffic through from https sources. Make sure the following is\nuncommented. This applies for all PPA's that use https.\n\n\n# /etc/apt-cacher-ng/acng.conf\nPassThroughPattern: .*",
+            "text": "Misc Tips, TroubleShooting\n\n\nSending commands to LXD containers\n\n\nUse \nbash -c \"<command>\"\n for commands with wildcards. i.e.\n\n\nfor machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\\\n    do lxc exec \"${machine}\" -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; done\n\n\n\n\nfish shell is actually a little bit cleaner\n\n\nfor machine in (lxc list | grep RUNNING | awk '{print $2}') ; \\\n    lxc exec $machine -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; end\n\n\n\n\n# change all their time zones\nfor machine in (lxc list | grep RUNNING | awk '{print $2}') ; \\\n    lxc exec $machine -- bash -c \"timedatectl set-timezone America/Los_Angeles\" ; end\n# check to see if anyone is logged in before rebooting\nfor machine in (lxc list | grep RUNNING | awk '{print $2}') ; echo ; \\\n    echo $machine ; lxc exec $machine -- bash -c \"who\" ; end \n\n\n\n\nUbuntu-Mate-Welcome-Center doesn't work some for some repos\n\n\nPerhaps your apt-cacher-ng proxy server isn't configured to allow \ntraffic through from https sources. Make sure the following is\nuncommented. This applies for all PPA's that use https.\n\n\n# /etc/apt-cacher-ng/acng.conf\nPassThroughPattern: .*",
             "title": "Misc Tips, Trouble Shooting"
         },
         {
@@ -442,7 +442,7 @@
         },
         {
             "location": "/misc_tips_troubleshooting/#sending-commands-to-lxd-containers",
-            "text": "Use  bash -c \"<command>\"  for commands with wildcards. i.e.  for machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\\\n    do lxc exec \"${machine}\" -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; done",
+            "text": "Use  bash -c \"<command>\"  for commands with wildcards. i.e.  for machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\\\n    do lxc exec \"${machine}\" -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; done  fish shell is actually a little bit cleaner  for machine in (lxc list | grep RUNNING | awk '{print $2}') ; \\\n    lxc exec $machine -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; end  # change all their time zones\nfor machine in (lxc list | grep RUNNING | awk '{print $2}') ; \\\n    lxc exec $machine -- bash -c \"timedatectl set-timezone America/Los_Angeles\" ; end\n# check to see if anyone is logged in before rebooting\nfor machine in (lxc list | grep RUNNING | awk '{print $2}') ; echo ; \\\n    echo $machine ; lxc exec $machine -- bash -c \"who\" ; end",
             "title": "Sending commands to LXD containers"
         },
         {
