@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nSelf Signed Certs",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Self Signed Certs",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs",
             "title": "Git Repo For These Docs"
         },
         {
@@ -429,6 +429,26 @@
             "location": "/arch_postgresql_nspawn/#quick-dirty-postgresql-nspawn-container-on-arch-linux",
             "text": "Refer to the  Nspawn  page for setting up the nspawn container. \nAnd then refer the  ArchWiki instructions \nfor postgresql.    You'll want to install postgresql, set a password for the default user  postgres ,\nand then login as postgres and initilize the database.    pacman -S postgresql\n# passwd for postgresql user \npasswd postgres \n# login as postgres \nsu -l postgres\n# initialize the databse cluster\n[postgres]$ initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'  You'll need to configure  /var/lib/postgres/data/pg_hba.conf  and /var/lib/postgres/data/postgresql.conf  for remote access,\npresumably with an identd daemon in mind.  The ident daemon will\nlisten on port 113, not on the machine with the database server,\nbut it listens from the machine where is the client that remotely\nwants to access the database.",
             "title": "Quick Dirty Postgresql Nspawn Container on Arch Linux"
+        },
+        {
+            "location": "/misc_tips_troubleshooting/",
+            "text": "Misc Tips, TroubleShooting\n\n\nSending commands to LXD containers\n\n\nUse \nbash -c \"<command>\"\n for commands with wildcards. i.e.\n\n\nfor machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\\\n    do lxc exec \"${machine}\" -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; done\n\n\n\n\nUbuntu-Mate-Welcome-Center doesn't work some for some repos\n\n\nPerhaps your apt-cacher-ng proxy server isn't configured to allow \ntraffic through from https sources. Make sure the following is\nuncommented. This applies for all PPA's that use https.\n\n\n# /etc/apt-cacher-ng/acng.conf\nPassThroughPattern: .*",
+            "title": "Misc Tips, Trouble Shooting"
+        },
+        {
+            "location": "/misc_tips_troubleshooting/#misc-tips-troubleshooting",
+            "text": "",
+            "title": "Misc Tips, TroubleShooting"
+        },
+        {
+            "location": "/misc_tips_troubleshooting/#sending-commands-to-lxd-containers",
+            "text": "Use  bash -c \"<command>\"  for commands with wildcards. i.e.  for machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\\\n    do lxc exec \"${machine}\" -- bash -c \"cat /etc/apt/apt.conf.d/02*\" ; done",
+            "title": "Sending commands to LXD containers"
+        },
+        {
+            "location": "/misc_tips_troubleshooting/#ubuntu-mate-welcome-center-doesnt-work-some-for-some-repos",
+            "text": "Perhaps your apt-cacher-ng proxy server isn't configured to allow \ntraffic through from https sources. Make sure the following is\nuncommented. This applies for all PPA's that use https.  # /etc/apt-cacher-ng/acng.conf\nPassThroughPattern: .*",
+            "title": "Ubuntu-Mate-Welcome-Center doesn't work some for some repos"
         },
         {
             "location": "/self_signed_certs/",

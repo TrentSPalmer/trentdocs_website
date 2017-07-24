@@ -99,6 +99,14 @@
 
     
     <url>
+     <loc>/misc_tips_troubleshooting/</loc>
+     <lastmod>2017-07-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/self_signed_certs/</loc>
      <lastmod>2017-07-23</lastmod>
      <changefreq>daily</changefreq>

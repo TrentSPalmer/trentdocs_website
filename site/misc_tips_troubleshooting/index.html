@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Quick Dirty Postgresql Nspawn Container on Arch Linux - Trent Docs</title>
+  <title>Misc Tips, Trouble Shooting - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Quick Dirty Postgresql Nspawn Container on Arch Linux";
-    var mkdocs_page_input_path = "arch_postgresql_nspawn.md";
-    var mkdocs_page_url = "/arch_postgresql_nspawn/";
+    var mkdocs_page_name = "Misc Tips, Trouble Shooting";
+    var mkdocs_page_input_path = "misc_tips_troubleshooting.md";
+    var mkdocs_page_url = "/misc_tips_troubleshooting/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -102,20 +102,28 @@
     <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+    <a class="current" href="./">Misc Tips, Trouble Shooting</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#quick-dirty-postgresql-nspawn-container-on-arch-linux">Quick Dirty Postgresql Nspawn Container on Arch Linux</a></li>
+    <li class="toctree-l2"><a href="#misc-tips-troubleshooting">Misc Tips, TroubleShooting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#sending-commands-to-lxd-containers">Sending commands to LXD containers</a></li>
+        
+            <li><a class="toctree-l3" href="#ubuntu-mate-welcome-center-doesnt-work-some-for-some-repos">Ubuntu-Mate-Welcome-Center doesn't work some for some repos</a></li>
+        
+        </ul>
     
 
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../misc_tips_troubleshooting/">Misc Tips, Trouble Shooting</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -145,7 +153,7 @@
     
       
     
-    <li>Quick Dirty Postgresql Nspawn Container on Arch Linux</li>
+    <li>Misc Tips, Trouble Shooting</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -155,27 +163,20 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="quick-dirty-postgresql-nspawn-container-on-arch-linux">Quick Dirty Postgresql Nspawn Container on Arch Linux</h1>
-<p>Refer to the <a href="../nspawn/">Nspawn</a> page for setting up the nspawn container.<br />
-And then refer the <a href="https://wiki.archlinux.org/index.php/PostgreSQL">ArchWiki instructions</a>
-for postgresql.  </p>
-<p>You'll want to install postgresql, set a password for the default user <code>postgres</code>,
-and then login as postgres and initilize the database.  </p>
-<pre><code class="bash">pacman -S postgresql
-# passwd for postgresql user 
-passwd postgres 
-# login as postgres 
-su -l postgres
-# initialize the databse cluster
-[postgres]$ initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
+                <h1 id="misc-tips-troubleshooting">Misc Tips, TroubleShooting</h1>
+<h2 id="sending-commands-to-lxd-containers">Sending commands to LXD containers</h2>
+<p>Use <code>bash -c "&lt;command&gt;"</code> for commands with wildcards. i.e.</p>
+<pre><code class="bash">for machine in $(lxc list | grep RUNNING | awk '{print $2}') ;\
+    do lxc exec &quot;${machine}&quot; -- bash -c &quot;cat /etc/apt/apt.conf.d/02*&quot; ; done
 </code></pre>
 
-<p>You'll need to configure <code>/var/lib/postgres/data/pg_hba.conf</code> and
-<code>/var/lib/postgres/data/postgresql.conf</code> for remote access,
-presumably with an identd daemon in mind.  The ident daemon will
-listen on port 113, not on the machine with the database server,
-but it listens from the machine where is the client that remotely
-wants to access the database.</p>
+<h2 id="ubuntu-mate-welcome-center-doesnt-work-some-for-some-repos">Ubuntu-Mate-Welcome-Center doesn't work some for some repos</h2>
+<p>Perhaps your apt-cacher-ng proxy server isn't configured to allow 
+traffic through from https sources. Make sure the following is
+uncommented. This applies for all PPA's that use https.</p>
+<pre><code class="conf"># /etc/apt-cacher-ng/acng.conf
+PassThroughPattern: .*
+</code></pre>
               
             </div>
           </div>
@@ -183,10 +184,10 @@ wants to access the database.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../misc_tips_troubleshooting/" class="btn btn-neutral float-right" title="Misc Tips, Trouble Shooting">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../self_signed_certs/" class="btn btn-neutral float-right" title="Self Signed Certs">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../arch_redis_nspawn/" class="btn btn-neutral" title="Quick Dirty Redis Nspawn Container on Arch Linux"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../arch_postgresql_nspawn/" class="btn btn-neutral" title="Quick Dirty Postgresql Nspawn Container on Arch Linux"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -212,10 +213,10 @@ wants to access the database.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../arch_redis_nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../arch_postgresql_nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../misc_tips_troubleshooting/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../self_signed_certs/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
