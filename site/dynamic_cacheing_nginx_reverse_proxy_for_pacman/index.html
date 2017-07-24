@@ -108,6 +108,8 @@
         
             <li><a class="toctree-l3" href="#systemd-timer-for-the-systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache">systemd timer for the systemd service that deletes the pacman database files from the proxy cache</a></li>
         
+            <li><a class="toctree-l3" href="#if-you-prefer-cron-because-the-server-is-actually-an-ubuntu1604-lxd-container">If you prefer cron because the server is actually an ubuntu:16.04 LXD container</a></li>
+        
         </ul>
     
 
@@ -203,7 +205,7 @@ working as of July 2017 with a fresh install of nginx.</p>
 <p>You can start with a default <code>/etc/nginx/nginx.conf</code>,
 and add the line <code>include sites-enabled/*;</code>
 at the end of the <em>http</em> section.</p>
-<pre><code class="text"># /etc/nginx/nginx.conf
+<pre><code class="nginx"># /etc/nginx/nginx.conf
 #user html;
 worker_processes  1;
 
@@ -337,11 +339,11 @@ have to assign static ip addresses and explicitly write the local
 ip address instead, then that should match what you write in your mirrorlist.</p>
 <p>And of course your mirrorlist entry
 on the client machine, has to preserve the directory scheme.</p>
-<pre><code class="text"># /etc/pacman.d/mirrorlist
+<pre><code class="conf"># /etc/pacman.d/mirrorlist
 Server = http://&lt;hostname or ip address&gt;:&lt;port if not 80&gt;/archlinux/$repo/os/$arch
 </code></pre>
 
-<pre><code class="text"># /etc/nginx/sites-enabled/proxy_cache.conf
+<pre><code class="nginx"># /etc/nginx/sites-enabled/proxy_cache.conf
 # nginx may need to resolve domain names at run time
 resolver 8.8.8.8 8.8.4.4;
 
@@ -432,7 +434,7 @@ server
 </code></pre>
 
 <p>Keeps the 2 most recent versions of each package using paccache command.</p>
-<pre><code class="text"># /etc/systemd/system/proxy_cache_clean.service
+<pre><code class="conf"># /etc/systemd/system/proxy_cache_clean.service
 [Unit]
 Description=Clean The pacman proxy cache
 
@@ -444,7 +446,7 @@ StandardError=syslog
 </code></pre>
 
 <h2 id="systemd-timer-for-the-systemd-service-that-cleans-the-proxy-cache">systemd timer for the systemd service that cleans the proxy cache</h2>
-<pre><code class="text"># /etc/systemd/system/proxy_cache_clean.timer
+<pre><code class="conf"># /etc/systemd/system/proxy_cache_clean.timer
 [Unit]
 Description=Timer for clean The pacman proxy cache
 
@@ -466,7 +468,7 @@ WantedBy=timers.target
 the database files, then you'll just be stuck with old database files, unless
 you periodically delete them. But I'm not sure about all this, will keep an
 eye on things.</p>
-<pre><code class="text"># /etc/systemd/system/proxy_cache_database_clean.service
+<pre><code class="conf"># /etc/systemd/system/proxy_cache_database_clean.service
 [Unit]
 Description=Clean The pacman proxy cache database
 
@@ -478,7 +480,7 @@ StandardError=syslog
 </code></pre>
 
 <h2 id="systemd-timer-for-the-systemd-service-that-deletes-the-pacman-database-files-from-the-proxy-cache">systemd timer for the systemd service that deletes the pacman database files from the proxy cache</h2>
-<pre><code class="text"># /etc/systemd/system/proxy_cache_database_clean.timer
+<pre><code class="conf"># /etc/systemd/system/proxy_cache_database_clean.timer
 [Unit]
 Description=Timer for clean The pacman proxy cache database
 
@@ -489,6 +491,13 @@ Unit=proxy_cache_database_clean.service
 
 [Install]
 WantedBy=timers.target
+</code></pre>
+
+<h2 id="if-you-prefer-cron-because-the-server-is-actually-an-ubuntu1604-lxd-container">If you prefer cron because the server is actually an ubuntu:16.04 LXD container</h2>
+<p>Make sure single quote in the command here.</p>
+<pre><code class="cron">#!/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+5,20,35,50 * * * * /bin/bash -c 'for f in $(find /var/www/html/pacman-cache -name *db) ; do rm $f; done'
 </code></pre>
               
             </div>

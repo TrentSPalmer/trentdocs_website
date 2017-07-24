@@ -41,7 +41,7 @@ You can start with a default `/etc/nginx/nginx.conf`,
 and add the line `include sites-enabled/*;`
 at the end of the *http* section.
 
-```text
+```nginx
 # /etc/nginx/nginx.conf
 #user html;
 worker_processes  1;
@@ -181,12 +181,12 @@ ip address instead, then that should match what you write in your mirrorlist.
 And of course your mirrorlist entry
 on the client machine, has to preserve the directory scheme.
 
-```text
+```conf
 # /etc/pacman.d/mirrorlist
 Server = http://<hostname or ip address>:<port if not 80>/archlinux/$repo/os/$arch
 ```
 
-```text
+```nginx
 # /etc/nginx/sites-enabled/proxy_cache.conf
 # nginx may need to resolve domain names at run time
 resolver 8.8.8.8 8.8.4.4;
@@ -282,7 +282,7 @@ systemctl enable/start /etc/systemd/system/proxy_cache_clean.timer
 
 Keeps the 2 most recent versions of each package using paccache command.
 
-```text
+```conf
 # /etc/systemd/system/proxy_cache_clean.service
 [Unit]
 Description=Clean The pacman proxy cache
@@ -296,7 +296,7 @@ StandardError=syslog
 
 ## systemd timer for the systemd service that cleans the proxy cache
 
-```text
+```conf
 # /etc/systemd/system/proxy_cache_clean.timer
 [Unit]
 Description=Timer for clean The pacman proxy cache
@@ -323,7 +323,7 @@ the database files, then you'll just be stuck with old database files, unless
 you periodically delete them. But I'm not sure about all this, will keep an
 eye on things.
 
-```text
+```conf
 # /etc/systemd/system/proxy_cache_database_clean.service
 [Unit]
 Description=Clean The pacman proxy cache database
@@ -337,7 +337,7 @@ StandardError=syslog
 
 ## systemd timer for the systemd service that deletes the pacman database files from the proxy cache
 
-```text
+```conf
 # /etc/systemd/system/proxy_cache_database_clean.timer
 [Unit]
 Description=Timer for clean The pacman proxy cache database
@@ -349,4 +349,13 @@ Unit=proxy_cache_database_clean.service
 
 [Install]
 WantedBy=timers.target
+```
+
+## If you prefer cron because the server is actually an ubuntu:16.04 LXD container
+Make sure single quote in the command here.
+
+```cron
+#!/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+5,20,35,50 * * * * /bin/bash -c 'for f in $(find /var/www/html/pacman-cache -name *db) ; do rm $f; done'
 ```
