@@ -25,6 +25,31 @@ for machine in (lxc list | grep RUNNING | awk '{print $2}') ; echo ; \
     echo $machine ; lxc exec $machine -- bash -c "who" ; end 
 ```
 
+## Move LXD container to another Server
+
+```bash
+# stop the container
+lxc stop <container name>
+# publish image of container to local *storage*
+lxc publish <container name> --alias <image name>
+# export the new image to tarball
+lxc image export <image name>
+# scp tarball to other box
+scp a4762b114fecee2e2bc227b9032405642c5286c02009babef7953e011e597bfe.tar.gz server:
+# on other box import the image
+lxc image import <tarball file name> --alias <image name>
+# launch container
+lxc launch <image name> <container name>
+# assign profile to container
+lxc profile assign <container name> <profile name>
+```
+
+Shell into the new running container, update any network interface
+configurations that you need to, and then restart the container.
+
+See also
+[LXD Container Home Server Networking For Dummies](lxd_container_home_server_networking_for_dummies.md)
+
 ## Ubuntu-Mate-Welcome-Center doesn't work some for some repos
 
 Perhaps your apt-cacher-ng proxy server isn't configured to allow 
