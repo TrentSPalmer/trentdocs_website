@@ -7,6 +7,7 @@ Obviously, the commit history will reflect the time when these documents are wri
 * [How To Reassign A Static Ip Address with dnsmasq](how_to_reassign_a_static_ip_address_with_dnsmasq.md)
 * [Serve And Share Apps From Your Phone With Fdroid](serve_and_share_apps_from_your_phone_with_fdroid.md)
 * [Nspawn Containers](nspawn.md)
+* [Gentoo LXD Container](gentoo_lxd_container.md)
 * [Mastodon on Arch](mastodon_on_arch.md)
 * [Debian Nspawn Container On Arch For Testing Apache Configurations](debian_nspawn_container_on_arch_for_testing_apache_configurations.md)
 * [Dynamic Cacheing Nginx Reverse Proxy For Pacman](dynamic_cacheing_nginx_reverse_proxy_for_pacman.md)

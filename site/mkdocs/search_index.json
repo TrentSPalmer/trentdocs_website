@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nGentoo LXD Container\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Gentoo LXD Container  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs",
             "title": "Git Repo For These Docs"
         },
         {
@@ -274,6 +274,31 @@
             "location": "/nspawn/#final-observations",
             "text": "You can start/stop nspawn containers with  machinectl  command.   You can start nspawn containers with  systemd-nspawn  command.  You can configure the systemd service for a container with @nspawn.service file override  Or you can configure an nspawn container with a dot.nspawn file   But in regards to the above list\nI have noticed differences in behaviour,\nin some scenarios, concerning file attributes\nfor bind mounts.  Another curiosity: when you have nspawn containers natted on VirtualEthernet connections,\nthey might be able to ping each other at 10.x.y.z, but not resolve each other. But they might\nbe able to resolve each other if they are all connected to the same bridge interface or nspawn\nnetwork zone, but will randomly resolve each other in any of the 10.x.y.z, 169.x.y.z,\nor fe80::....:....:....%host (ipv6 local) spaces, which would complicate configuring the containers\nto talk to each other. But I intend to look into this some more.",
             "title": "Final Observations"
+        },
+        {
+            "location": "/gentoo_lxd_container/",
+            "text": "Gentoo LXD Container\n\n\nThere are Gentoo images at \nlinuxcontainers.org\n\n\nlxc image list images: | grep gentoo\nlxc init images:34760012759f\n# or\nlxc init images:34760012759f <pick a name>\n\n\n\n\nNetworking\n\n\nThe default image will request dhcp service on eth0. If you need a second static\nconnection on eth1, do the following. Describe eth1 in \n/etc/conf.d/net\n\n\n# /etc/conf.d/net\nconfig_eth1=\"10.44.84.101 netmask 255.255.255.0 brd 10.44.84.255\"\nroutes_eth1=\"default via 10.44.84.1\"\n\n\n\n\nThen in \n/etc/init.d/\n\n\nln -s /etc/init.d/net.lo /etc/init.d/net.eth1\n\n\n\n\nEnable net.eth1 in init.\n\n\nrc-update add net.eth1 default\n\n\n\n\nAnd then start networking on eth1\n\n\n/etc/init.d/net.eth1 start\n\n\n\n\nLocale and Timezone\n\n\nYou're supposed to write your timezone in \n/etc/timezone\n, \necho \"Europe/Brussels\" > /etc/timezone\n,\nand then run the command \nemerge --config sys-libs/timezone-data\n. But this doesn't work.\n\n\nYou can set the locale by uncommenting your locale in \n/etc/locale-gen\n, and then\nrunning the following commands.\n\n\nlocale-gen\neselect locale list\neselect locale set <number>\n. /etc/profile\n\n\n\n\nAnd the following corrected the timezone.\n\n\nunlink /etc/localtime\nln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime",
+            "title": "Gentoo LXD Container"
+        },
+        {
+            "location": "/gentoo_lxd_container/#gentoo-lxd-container",
+            "text": "",
+            "title": "Gentoo LXD Container"
+        },
+        {
+            "location": "/gentoo_lxd_container/#there-are-gentoo-images-at-linuxcontainersorg",
+            "text": "lxc image list images: | grep gentoo\nlxc init images:34760012759f\n# or\nlxc init images:34760012759f <pick a name>",
+            "title": "There are Gentoo images at linuxcontainers.org"
+        },
+        {
+            "location": "/gentoo_lxd_container/#networking",
+            "text": "The default image will request dhcp service on eth0. If you need a second static\nconnection on eth1, do the following. Describe eth1 in  /etc/conf.d/net  # /etc/conf.d/net\nconfig_eth1=\"10.44.84.101 netmask 255.255.255.0 brd 10.44.84.255\"\nroutes_eth1=\"default via 10.44.84.1\"  Then in  /etc/init.d/  ln -s /etc/init.d/net.lo /etc/init.d/net.eth1  Enable net.eth1 in init.  rc-update add net.eth1 default  And then start networking on eth1  /etc/init.d/net.eth1 start",
+            "title": "Networking"
+        },
+        {
+            "location": "/gentoo_lxd_container/#locale-and-timezone",
+            "text": "You're supposed to write your timezone in  /etc/timezone ,  echo \"Europe/Brussels\" > /etc/timezone ,\nand then run the command  emerge --config sys-libs/timezone-data . But this doesn't work.  You can set the locale by uncommenting your locale in  /etc/locale-gen , and then\nrunning the following commands.  locale-gen\neselect locale list\neselect locale set <number>\n. /etc/profile  And the following corrected the timezone.  unlink /etc/localtime\nln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime",
+            "title": "Locale and Timezone"
         },
         {
             "location": "/mastodon_on_arch/",

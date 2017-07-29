@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>How To Reassign A Static Ip Address with dnsmasq - Trent Docs</title>
+  <title>Gentoo LXD Container - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "How To Reassign A Static Ip Address with dnsmasq";
-    var mkdocs_page_input_path = "how_to_reassign_a_static_ip_address_with_dnsmasq.md";
-    var mkdocs_page_url = "/how_to_reassign_a_static_ip_address_with_dnsmasq/";
+    var mkdocs_page_name = "Gentoo LXD Container";
+    var mkdocs_page_input_path = "gentoo_lxd_container.md";
+    var mkdocs_page_url = "/gentoo_lxd_container/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,15 +62,9 @@
     <a class="" href="../lxd_container_home_server_networking_for_dummies/">LXD Container Home Server Networking For Dummies</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">How To Reassign A Static Ip Address with dnsmasq</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</a></li>
-    
-
-    </ul>
+    <a class="" href="../how_to_reassign_a_static_ip_address_with_dnsmasq/">How To Reassign A Static Ip Address with dnsmasq</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -83,9 +77,25 @@
     <a class="" href="../nspawn/">Nspawn</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../gentoo_lxd_container/">Gentoo LXD Container</a>
+    <a class="current" href="./">Gentoo LXD Container</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#gentoo-lxd-container">Gentoo LXD Container</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#there-are-gentoo-images-at-linuxcontainersorg">There are Gentoo images at linuxcontainers.org</a></li>
+        
+            <li><a class="toctree-l3" href="#networking">Networking</a></li>
+        
+            <li><a class="toctree-l3" href="#locale-and-timezone">Locale and Timezone</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -150,7 +160,7 @@
     
       
     
-    <li>How To Reassign A Static Ip Address with dnsmasq</li>
+    <li>Gentoo LXD Container</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -160,25 +170,49 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</h1>
-<p>On your router you can assign static ip addresses for various machines
-in your network, by writing the reservations in the file <code>/etc/dnsmasq.conf</code>.</p>
-<p>These will be in the form as below.</p>
-<p><code>dhcp-host=&lt;mac address&gt;,&lt;ip address&gt;</code></p>
-<p>So here's how you transfer an existing static ip address assignment to
-a new client machine. Begin by editting the file <code>/etc/dnsmasq.conf</code> on
-your router, and update the mac address associated with the intended
-ip address.</p>
-<p>Next, temporarily stop dnsmasq.</p>
-<pre><code class="bash">systemctl stop dnsmasq
+                <h1 id="gentoo-lxd-container">Gentoo LXD Container</h1>
+<h2 id="there-are-gentoo-images-at-linuxcontainersorg">There are Gentoo images at <a href="https://us.images.linuxcontainers.org/">linuxcontainers.org</a></h2>
+<pre><code class="bash">lxc image list images: | grep gentoo
+lxc init images:34760012759f
+# or
+lxc init images:34760012759f &lt;pick a name&gt;
 </code></pre>
 
-<p>Next shutdown networking on the new client machine. Shutting the machine down might work,
-or the command <code>dhclient -v -r</code> might get the job done (you will lose the connection).</p>
-<p>Now on the router, edit the file <code>/var/lib/misc/dnsmasq.leases</code>, and delete the pre-existing
-lease for the old client machine that will no longer exist.</p>
-<p>Restart dnsmasq on the router,<br />
-and then restart networking on the new client machine.</p>
+<h2 id="networking">Networking</h2>
+<p>The default image will request dhcp service on eth0. If you need a second static
+connection on eth1, do the following. Describe eth1 in <code>/etc/conf.d/net</code></p>
+<pre><code class="conf"># /etc/conf.d/net
+config_eth1=&quot;10.44.84.101 netmask 255.255.255.0 brd 10.44.84.255&quot;
+routes_eth1=&quot;default via 10.44.84.1&quot;
+</code></pre>
+
+<p>Then in <code>/etc/init.d/</code></p>
+<pre><code class="bash">ln -s /etc/init.d/net.lo /etc/init.d/net.eth1
+</code></pre>
+
+<p>Enable net.eth1 in init.</p>
+<pre><code class="bash">rc-update add net.eth1 default
+</code></pre>
+
+<p>And then start networking on eth1</p>
+<pre><code class="bash">/etc/init.d/net.eth1 start
+</code></pre>
+
+<h2 id="locale-and-timezone">Locale and Timezone</h2>
+<p>You're supposed to write your timezone in <code>/etc/timezone</code>, <code>echo "Europe/Brussels" &gt; /etc/timezone</code>,
+and then run the command <code>emerge --config sys-libs/timezone-data</code>. But this doesn't work.</p>
+<p>You can set the locale by uncommenting your locale in <code>/etc/locale-gen</code>, and then
+running the following commands.</p>
+<pre><code class="bash">locale-gen
+eselect locale list
+eselect locale set &lt;number&gt;
+. /etc/profile
+</code></pre>
+
+<p>And the following corrected the timezone.</p>
+<pre><code class="bash">unlink /etc/localtime
+ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+</code></pre>
               
             </div>
           </div>
@@ -186,10 +220,10 @@ and then restart networking on the new client machine.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../serve_and_share_apps_from_your_phone_with_fdroid/" class="btn btn-neutral float-right" title="Serve And Share Apps From Your Phone With Fdroid">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mastodon_on_arch/" class="btn btn-neutral float-right" title="Mastodon on Arch">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../lxd_container_home_server_networking_for_dummies/" class="btn btn-neutral" title="LXD Container Home Server Networking For Dummies"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nspawn/" class="btn btn-neutral" title="Nspawn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -215,10 +249,10 @@ and then restart networking on the new client machine.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../lxd_container_home_server_networking_for_dummies/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../nspawn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../serve_and_share_apps_from_your_phone_with_fdroid/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../mastodon_on_arch/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
