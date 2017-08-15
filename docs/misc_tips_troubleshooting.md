@@ -60,3 +60,8 @@ uncommented. This applies for all PPA's that use https.
 # /etc/apt-cacher-ng/acng.conf
 PassThroughPattern: .*
 ```
+
+## Quitting Mosh
+
+The key combination to quit mosh it `ctrl+6+.`
+Also, WTF?
