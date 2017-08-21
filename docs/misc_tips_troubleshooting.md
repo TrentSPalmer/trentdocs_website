@@ -65,3 +65,10 @@ PassThroughPattern: .*
 
 The key combination to quit mosh it `ctrl+6+.`
 Also, WTF?
+
+## Updating Caddy Server
+
+You update Caddy Server with a new Go Binary, try to restart caddy.service, and it fails.
+Maybe you get an error message such as the following `listen tcp :80: bind: permission denied` and/or
+`listen tcp :443: bind: permission denied`.  
+Fix this error with the following command `sudo setcap CAP_NET_BIND_SERVICE=+eip /path/to/caddy`

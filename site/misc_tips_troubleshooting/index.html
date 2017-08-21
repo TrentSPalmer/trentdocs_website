@@ -129,6 +129,8 @@
         
             <li><a class="toctree-l3" href="#quitting-mosh">Quitting Mosh</a></li>
         
+            <li><a class="toctree-l3" href="#updating-caddy-server">Updating Caddy Server</a></li>
+        
         </ul>
     
 
@@ -224,6 +226,11 @@ PassThroughPattern: .*
 <h2 id="quitting-mosh">Quitting Mosh</h2>
 <p>The key combination to quit mosh it <code>ctrl+6+.</code>
 Also, WTF?</p>
+<h2 id="updating-caddy-server">Updating Caddy Server</h2>
+<p>You update Caddy Server with a new Go Binary, try to restart caddy.service, and it fails.
+Maybe you get an error message such as the following <code>listen tcp :80: bind: permission denied</code> and/or
+<code>listen tcp :443: bind: permission denied</code>.<br />
+Fix this error with the following command <code>sudo setcap CAP_NET_BIND_SERVICE=+eip /path/to/caddy</code></p>
               
             </div>
           </div>
