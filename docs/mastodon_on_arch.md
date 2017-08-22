@@ -57,3 +57,16 @@ if that is where assets are being stored, but it seems ok to delete
 In `~/live/.env.production`, `SINGLE_USER_MODE=false` has to be set
 to `false` until at least one user is created, or the web service won't 
 even start.  (Also `chmod 755 ~/`)
+
+## The Different Documentation for Updating
+[Updating Guide](https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Updating-Mastodon-Guide.md)  
+I really think that when you update, you're going to want to read through the installation guide,
+then compare it to the older version, then read through the upgrade guide. And finally, I think
+you want to really comb through the ***Upgrade notes*** in the
+[Release Notes](https://github.com/tootsuite/mastodon/releases)
+
+[Installation Guide](https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Production-guide.md)
+(bare metal)  
+You may also find this
+[Older Installation Guide](https://github.com/tootsuite/documentation/blob/dd52795d7d1f5cd68b3cfb763321d3083db9b28b/Running-Mastodon/Production-guide.md)
+useful for reference.

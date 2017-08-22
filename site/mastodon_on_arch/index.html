@@ -97,6 +97,8 @@
         
             <li><a class="toctree-l3" href="#other-observations">Other Observations</a></li>
         
+            <li><a class="toctree-l3" href="#the-different-documentation-for-updating">The Different Documentation for Updating</a></li>
+        
         </ul>
     
 
@@ -218,6 +220,17 @@ if that is where assets are being stored, but it seems ok to delete
 <p>In <code>~/live/.env.production</code>, <code>SINGLE_USER_MODE=false</code> has to be set
 to <code>false</code> until at least one user is created, or the web service won't 
 even start.  (Also <code>chmod 755 ~/</code>)</p>
+<h2 id="the-different-documentation-for-updating">The Different Documentation for Updating</h2>
+<p><a href="https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Updating-Mastodon-Guide.md">Updating Guide</a><br />
+I really think that when you update, you're going to want to read through the installation guide,
+then compare it to the older version, then read through the upgrade guide. And finally, I think
+you want to really comb through the <strong><em>Upgrade notes</em></strong> in the
+<a href="https://github.com/tootsuite/mastodon/releases">Release Notes</a></p>
+<p><a href="https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Production-guide.md">Installation Guide</a>
+(bare metal)<br />
+You may also find this
+<a href="https://github.com/tootsuite/documentation/blob/dd52795d7d1f5cd68b3cfb763321d3083db9b28b/Running-Mastodon/Production-guide.md">Older Installation Guide</a>
+useful for reference.</p>
               
             </div>
           </div>
