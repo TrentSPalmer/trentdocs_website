@@ -16,6 +16,7 @@ Obviously, the commit history will reflect the time when these documents are wri
 * [Quick Dirty Postgresql Nspawn Container on Arch Linux](arch_postgresql_nspawn.md)
 * [Misc Tips, Trouble Shooting](misc_tips_troubleshooting.md)
 * [Self Signed Certs](self_signed_certs.md)
+* [Selfoss on Centos7](selfoss_on_centos7.md)
 
 <!---
     * [Template](Template.md)

@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Mastodon on Arch - Trent Docs</title>
+  <title>Selfoss on Centos7 - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Mastodon on Arch";
-    var mkdocs_page_input_path = "mastodon_on_arch.md";
-    var mkdocs_page_url = "/mastodon_on_arch/";
+    var mkdocs_page_name = "Selfoss on Centos7";
+    var mkdocs_page_input_path = "selfoss_on_centos7.md";
+    var mkdocs_page_url = "/selfoss_on_centos7/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -82,27 +82,9 @@
     <a class="" href="../gentoo_lxd_container/">Gentoo LXD Container</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Mastodon on Arch</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#some-observations-about-installing-mastodon-on-arch">Some Observations About Installing Mastodon on Arch.</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#nginx">Nginx</a></li>
-        
-            <li><a class="toctree-l3" href="#installing-the-dependancies">Installing the Dependancies</a></li>
-        
-            <li><a class="toctree-l3" href="#other-observations">Other Observations</a></li>
-        
-            <li><a class="toctree-l3" href="#the-different-documentation-for-updating">The Different Documentation for Updating</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../mastodon_on_arch/">Mastodon on Arch</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -140,9 +122,15 @@
     <a class="" href="../self_signed_certs/">Self Signed Certs</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../selfoss_on_centos7/">Selfoss on Centos7</a>
+    <a class="current" href="./">Selfoss on Centos7</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#selfoss-on-centos-7">Selfoss on Centos 7</a></li>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -167,7 +155,7 @@
     
       
     
-    <li>Mastodon on Arch</li>
+    <li>Selfoss on Centos7</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -177,65 +165,37 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="some-observations-about-installing-mastodon-on-arch">Some Observations About Installing Mastodon on Arch.</h1>
-<h2 id="nginx">Nginx</h2>
-<p>From the <a href="https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Production-guide.md">Production Guide</a>
-you can copy the example nginx.conf file to <code>/etc/nginx/sites-enabled/some_arbitrary.conf</code>,
-and then add the following to <code>/etc/nginx/nginx.conf</code> in the http section,
-this with a fresh install of nginx with the default configuration file.</p>
-<pre><code class="bash"># /etc/nginx/nginx.conf 
-http {
-    include sites-enabled/*;
-}
-</code></pre>
-
-<h2 id="installing-the-dependancies">Installing the Dependancies</h2>
-<pre><code class="bash">pacman -S certbot nginx libxml2 imagemagick ffmpeg git yarn npm python2 oidentd
-</code></pre>
-
-<pre><code class="bash"># I'm guessing here
-pacman -S libpqxx libxslt protobuf protobuf-c
-</code></pre>
-
+                <h1 id="selfoss-on-centos-7">Selfoss on Centos 7</h1>
+<p>The target here is a very low resource vps running Centos7.
+You can use mysql or postgresql, but performance is fine with sqlite database.
+You'll need the epel repo in order to install python2-certbot-apache.</p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-centos-7">Here's a great guide for setting up apache with letsencrypt on Centos7</a>.</p>
+<p>You'll want to install the following packages</p>
 <ul>
-<li>I'm assuming base-devel is installed</li>
-<li>python2 seems to be required to run <code>yarn install</code> command later on</li>
-<li>oidentd seems to be a usable replacement for pident</li>
-<li>libpqxx pulls in postgresql-libs</li>
-<li>file is already installed</li>
-<li>curl is already installed</li>
-<li>ruby-build and rbenv are installable from aur</li>
-<li>also postgresql and redis unless, those are in another container or whatever.</li>
+<li>mod_ssl</li>
+<li>python2-certbot-apache</li>
+<li>php</li>
+<li>php-gd</li>
+<li>php-http</li>
+<li>php-pdo</li>
+<li>unzip</li>
+<li>wget</li>
 </ul>
-<h2 id="other-observations">Other Observations</h2>
-<p>I discovered that between <code>gem install bundler</code> and<br />
-<code>bundle install --deployment --without development test</code>,
-you have to update your environment, with 
-<code>eval "$(rbenv init -)"</code>, i.e.</p>
-<pre><code class="bash">echo 'eval &quot;$(rbenv init -)&quot;' &gt;&gt; .bashrc
-# and then
-. ~/.bashrc
+<p><a href="https://selfoss.aditu.de/">The documentation</a> explains how to set up
+the config.ini and .htaccess files, RewriteEngine, RewriteBase,
+database, and explains the apache modules that you
+want enabled. Hint, use <code>apachectl -M</code>, <code>apachectl help</code>, etc.</p>
+<p>You'll probably want to extract the 
+application to <code>/var/www/html/selfoss/</code> or similar, and then add a configuration.</p>
+<pre><code class="conf"># /etc/httpd/conf.d/selfoss.conf
+Alias &quot;/selfoss/&quot; &quot;/var/www/html/selfoss/&quot;
+&lt;Directory &quot;/var/www/html/selfoss&quot;&gt;
+        Options FollowSymLinks
+        AllowOverride All
+&lt;/Directory&gt;
 </code></pre>
 
-<p>You have to update your environment more than once, during the
-installation.</p>
-<p>Presumably you don't ever want to delete the <code>~/live/Public/</code> directory
-if that is where assets are being stored, but it seems ok to delete 
-<code>~/live/node_modules</code> and then rerun the <code>yarn install</code> command.</p>
-<p>In <code>~/live/.env.production</code>, <code>SINGLE_USER_MODE=false</code> has to be set
-to <code>false</code> until at least one user is created, or the web service won't 
-even start.  (Also <code>chmod 755 ~/</code>)</p>
-<h2 id="the-different-documentation-for-updating">The Different Documentation for Updating</h2>
-<p><a href="https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Updating-Mastodon-Guide.md">Updating Guide</a><br />
-I really think that when you update, you're going to want to read through the installation guide,
-then compare it to the older version, then read through the upgrade guide. And finally, I think
-you want to really comb through the <strong><em>Upgrade notes</em></strong> in the
-<a href="https://github.com/tootsuite/mastodon/releases">Release Notes</a></p>
-<p><a href="https://github.com/tootsuite/documentation/blob/master/Running-Mastodon/Production-guide.md">Installation Guide</a>
-(bare metal)<br />
-You may also find this
-<a href="https://github.com/tootsuite/documentation/blob/dd52795d7d1f5cd68b3cfb763321d3083db9b28b/Running-Mastodon/Production-guide.md">Older Installation Guide</a>
-useful for reference.</p>
+<p>Make sure that the selfoss directory is owned by apache:apache.</p>
               
             </div>
           </div>
@@ -243,10 +203,8 @@ useful for reference.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/" class="btn btn-neutral float-right" title="Debian Nspawn Container On Arch For Testing Apache Configurations">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../gentoo_lxd_container/" class="btn btn-neutral" title="Gentoo LXD Container"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../self_signed_certs/" class="btn btn-neutral" title="Self Signed Certs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -272,10 +230,8 @@ useful for reference.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../gentoo_lxd_container/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../self_signed_certs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
