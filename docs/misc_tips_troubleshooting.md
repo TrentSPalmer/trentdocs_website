@@ -50,7 +50,7 @@ configurations that you need to, and then restart the container.
 See also
 [LXD Container Home Server Networking For Dummies](lxd_container_home_server_networking_for_dummies.md)
 
-## Ubuntu-Mate-Welcome-Center doesn't work some for some repos
+## Ubuntu-Mate-Welcome-Center doesn't work for some repos
 
 Perhaps your apt-cacher-ng proxy server isn't configured to allow 
 traffic through from https sources. Make sure the following is
