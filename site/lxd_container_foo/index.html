@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>How To Reassign A Static Ip Address with dnsmasq - Trent Docs</title>
+  <title>LXD Container Foo - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "How To Reassign A Static Ip Address with dnsmasq";
-    var mkdocs_page_input_path = "how_to_reassign_a_static_ip_address_with_dnsmasq.md";
-    var mkdocs_page_url = "/how_to_reassign_a_static_ip_address_with_dnsmasq/";
+    var mkdocs_page_name = "LXD Container Foo";
+    var mkdocs_page_input_path = "lxd_container_foo.md";
+    var mkdocs_page_url = "/lxd_container_foo/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,20 +62,26 @@
     <a class="" href="../lxd_container_home_server_networking_for_dummies/">LXD Container Home Server Networking For Dummies</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../lxd_container_foo/">LXD Container Foo</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">How To Reassign A Static Ip Address with dnsmasq</a>
+    <a class="current" href="./">LXD Container Foo</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</a></li>
+    <li class="toctree-l2"><a href="#more-notes-and-tips-for-using-lxd">More Notes and Tips for Using LXD</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#lxd-server-and-clients">LXD Server and Clients</a></li>
+        
+        </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../how_to_reassign_a_static_ip_address_with_dnsmasq/">How To Reassign A Static Ip Address with dnsmasq</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -160,7 +166,7 @@
     
       
     
-    <li>How To Reassign A Static Ip Address with dnsmasq</li>
+    <li>LXD Container Foo</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -170,25 +176,94 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</h1>
-<p>On your router you can assign static ip addresses for various machines
-in your network, by writing the reservations in the file <code>/etc/dnsmasq.conf</code>.</p>
-<p>These will be in the form as below.</p>
-<p><code>dhcp-host=&lt;mac address&gt;,&lt;ip address&gt;</code></p>
-<p>So here's how you transfer an existing static ip address assignment to
-a new client machine. Begin by editting the file <code>/etc/dnsmasq.conf</code> on
-your router, and update the mac address associated with the intended
-ip address.</p>
-<p>Next, temporarily stop dnsmasq.</p>
-<pre><code class="bash">systemctl stop dnsmasq
+                <h1 id="more-notes-and-tips-for-using-lxd">More Notes and Tips for Using LXD</h1>
+<h3 id="lxd-server-and-clients">LXD Server and <em>Clients</em></h3>
+<h5 id="your-lxd-hosts-can-establish-a-secure-client-server-relationship-very-quickly-and-easily">Your LXD hosts can establish a secure client-server relationship very quickly and easily.</h5>
+<pre><code class="bash"># First enable networking on Both the server and client:
+lxc config set core.https_address [::]:8443
+
+# Then on the server, set a password:
+lxc config set core.trust_password &lt;something-secure&gt;
+
+# Then on the client, add the server as a remote,
+# and enter the password you just created for it:
+lxc remote add &lt;server&gt; &lt;ip address&gt;
 </code></pre>
 
-<p>Next shutdown networking on the new client machine. Shutting the machine down might work,
-or the command <code>dhclient -v -r</code> might get the job done (you will lose the connection).</p>
-<p>Now on the router, edit the file <code>/var/lib/misc/dnsmasq.leases</code>, and delete the pre-existing
-lease for the old client machine that will no longer exist.</p>
-<p>Restart dnsmasq on the router,<br />
-and then restart networking on the new client machine.</p>
+<h5 id="now-from-the-perspective-of-the-client-machine-the-server-is-just-another-remote-same-as">Now from the perspective of the client machine, the server is just another remote, same as:</h5>
+<ul>
+<li><strong>local</strong> (the default)</li>
+<li><strong>ubuntu</strong> (where ubuntu images come from), and </li>
+<li><strong>images</strong> (where lxc images of other distros come from).</li>
+<li><strong>clyde</strong> (your host named clyde)</li>
+</ul>
+<pre><code class="bash"># command to list remotes
+# returns local, images, ubuntu, etc.
+lxc remote list
+
+# command to list containers on a remote
+lxc list &lt;remote&gt;:
+# i.e. for a remote named &quot;black&quot;
+lxc list black:
+
+# command to list images on a remote
+# i.e. for a remote name &quot;images&quot;
+lxc image list images:
+# or for a remote named &quot;ubuntu&quot;
+lxc image list ubuntu:
+# or for a specific image
+lxc image list ubuntu:16.04 # or
+lxc image list ubuntu:fdceb4d263b9
+</code></pre>
+
+<h5 id="now-you-can-move-containers-around-between-servers-and-clients">Now you can move containers around between servers and clients.</h5>
+<pre><code class="bash"># launch an ubuntu container from the ubuntu remote
+lxc launch ubuntu:16.04 &lt;optional name&gt;
+# or from a remote named &quot;black&quot;
+lxc launch black:069b95ed3a60 &lt;optional name&gt;
+# to list the images that black has available
+lxc image list black:
+
+# copy a container from a server named &quot;black&quot;
+# to your local client
+lxc copy black:jerry &lt;optional name to copy to&gt;
+# or from &quot;local&quot; back to &quot;black&quot;
+lxc copy jerry black:&lt;optional name to copy to&gt;
+# or move
+lxc move black:jerry &lt;optional name to copy to&gt;
+
+# or change the default remote from &quot;local&quot; to &quot;black&quot;
+lxc remote set-default black
+# and then reverse the syntax
+# copy a container from a server named &quot;black&quot;
+# to your local client
+lxc copy jerry local:&lt;optional name to copy to&gt;
+# or from &quot;local&quot; back to &quot;black&quot;
+lxc copy local:jerry &lt;optional name to copy to&gt;
+</code></pre>
+
+<h5 id="or-remote-control-another-lxd-server">Or remote control another LXD server</h5>
+<pre><code class="bash"># bash shell on container named &quot;jim&quot; running on
+# a remote server named &quot;black&quot;
+lxc exec black:jim bash
+
+# copy that
+lxc copy black:jim black:francine
+
+# snapshot
+lxc snapshot black:jim
+
+# delete a snapshot from a remote container
+# first get the containers info to see what
+# snapshots it has
+lxc info black:jim
+# and then delete
+lxc delete black:jim/snap0
+
+# or rollback/restore,
+# slightly different syntax vs &quot;delete&quot;
+lxc restore black:jim snap0
+</code></pre>
               
             </div>
           </div>
@@ -196,10 +271,10 @@ and then restart networking on the new client machine.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../serve_and_share_apps_from_your_phone_with_fdroid/" class="btn btn-neutral float-right" title="Serve And Share Apps From Your Phone With Fdroid">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../how_to_reassign_a_static_ip_address_with_dnsmasq/" class="btn btn-neutral float-right" title="How To Reassign A Static Ip Address with dnsmasq">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../lxd_container_foo/" class="btn btn-neutral" title="LXD Container Foo"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../lxd_container_home_server_networking_for_dummies/" class="btn btn-neutral" title="LXD Container Home Server Networking For Dummies"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -225,10 +300,10 @@ and then restart networking on the new client machine.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../lxd_container_foo/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../lxd_container_home_server_networking_for_dummies/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../serve_and_share_apps_from_your_phone_with_fdroid/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../how_to_reassign_a_static_ip_address_with_dnsmasq/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

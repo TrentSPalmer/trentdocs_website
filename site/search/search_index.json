@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nGentoo LXD Container\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs\n\n\nSelfoss on Centos7",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nLXD Container Foo\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nGentoo LXD Container\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs\n\n\nSelfoss on Centos7",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Gentoo LXD Container  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs  Selfoss on Centos7",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  LXD Container Foo  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Gentoo LXD Container  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs  Selfoss on Centos7",
             "title": "Git Repo For These Docs"
         },
         {
@@ -99,6 +99,41 @@
             "location": "/lxd_container_home_server_networking_for_dummies/#the-etchosts-file",
             "text": "Once you assign the containers static ip addresses for their  eth1 \ninterfaces, you can use the  /etc/hosts  file on each container to make them\naware of where the other containers and the host machine are.  For instance, if you want the container  quick-joey  to talk directly\nto the host machine, which will be at the ip address of  lxdbr1 , start a shell\non the container  quick-joey  lxc exec quick-joey bash  and edit  /etc/hosts  # /etc/hosts\n10.151.18.1    mothership  Or you have a container named  fat-cinderella , that needs to be able to talk\ndirectly  quick-joey .  lxc exec fat-cinderella bash\nvim /etc/hosts  # /etc/hosts\n10.151.18.123  quick-joey  etcetera",
             "title": "the /etc/hosts file"
+        },
+        {
+            "location": "/lxd_container_foo/",
+            "text": "More Notes and Tips for Using LXD\n\n\nLXD Server and \nClients\n\n\nYour LXD hosts can establish a secure client-server relationship very quickly and easily.\n\n\n# First enable networking on Both the server and client:\nlxc config set core.https_address [::]:8443\n\n# Then on the server, set a password:\nlxc config set core.trust_password <something-secure>\n\n# Then on the client, add the server as a remote,\n# and enter the password you just created for it:\nlxc remote add <server> <ip address>\n\n\n\n\nNow from the perspective of the client machine, the server is just another remote, same as:\n\n\n\n\nlocal\n (the default)\n\n\nubuntu\n (where ubuntu images come from), and \n\n\nimages\n (where lxc images of other distros come from).\n\n\nclyde\n (your host named clyde)\n\n\n\n\n# command to list remotes\n# returns local, images, ubuntu, etc.\nlxc remote list\n\n# command to list containers on a remote\nlxc list <remote>:\n# i.e. for a remote named \"black\"\nlxc list black:\n\n# command to list images on a remote\n# i.e. for a remote name \"images\"\nlxc image list images:\n# or for a remote named \"ubuntu\"\nlxc image list ubuntu:\n# or for a specific image\nlxc image list ubuntu:16.04 # or\nlxc image list ubuntu:fdceb4d263b9\n\n\n\n\nNow you can move containers around between servers and clients.\n\n\n# launch an ubuntu container from the ubuntu remote\nlxc launch ubuntu:16.04 <optional name>\n# or from a remote named \"black\"\nlxc launch black:069b95ed3a60 <optional name>\n# to list the images that black has available\nlxc image list black:\n\n# copy a container from a server named \"black\"\n# to your local client\nlxc copy black:jerry <optional name to copy to>\n# or from \"local\" back to \"black\"\nlxc copy jerry black:<optional name to copy to>\n# or move\nlxc move black:jerry <optional name to copy to>\n\n# or change the default remote from \"local\" to \"black\"\nlxc remote set-default black\n# and then reverse the syntax\n# copy a container from a server named \"black\"\n# to your local client\nlxc copy jerry local:<optional name to copy to>\n# or from \"local\" back to \"black\"\nlxc copy local:jerry <optional name to copy to>\n\n\n\n\nOr remote control another LXD server\n\n\n# bash shell on container named \"jim\" running on\n# a remote server named \"black\"\nlxc exec black:jim bash\n\n# copy that\nlxc copy black:jim black:francine\n\n# snapshot\nlxc snapshot black:jim\n\n# delete a snapshot from a remote container\n# first get the containers info to see what\n# snapshots it has\nlxc info black:jim\n# and then delete\nlxc delete black:jim/snap0\n\n# or rollback/restore,\n# slightly different syntax vs \"delete\"\nlxc restore black:jim snap0",
+            "title": "LXD Container Foo"
+        },
+        {
+            "location": "/lxd_container_foo/#more-notes-and-tips-for-using-lxd",
+            "text": "",
+            "title": "More Notes and Tips for Using LXD"
+        },
+        {
+            "location": "/lxd_container_foo/#lxd-server-and-clients",
+            "text": "",
+            "title": "LXD Server and Clients"
+        },
+        {
+            "location": "/lxd_container_foo/#your-lxd-hosts-can-establish-a-secure-client-server-relationship-very-quickly-and-easily",
+            "text": "# First enable networking on Both the server and client:\nlxc config set core.https_address [::]:8443\n\n# Then on the server, set a password:\nlxc config set core.trust_password <something-secure>\n\n# Then on the client, add the server as a remote,\n# and enter the password you just created for it:\nlxc remote add <server> <ip address>",
+            "title": "Your LXD hosts can establish a secure client-server relationship very quickly and easily."
+        },
+        {
+            "location": "/lxd_container_foo/#now-from-the-perspective-of-the-client-machine-the-server-is-just-another-remote-same-as",
+            "text": "local  (the default)  ubuntu  (where ubuntu images come from), and   images  (where lxc images of other distros come from).  clyde  (your host named clyde)   # command to list remotes\n# returns local, images, ubuntu, etc.\nlxc remote list\n\n# command to list containers on a remote\nlxc list <remote>:\n# i.e. for a remote named \"black\"\nlxc list black:\n\n# command to list images on a remote\n# i.e. for a remote name \"images\"\nlxc image list images:\n# or for a remote named \"ubuntu\"\nlxc image list ubuntu:\n# or for a specific image\nlxc image list ubuntu:16.04 # or\nlxc image list ubuntu:fdceb4d263b9",
+            "title": "Now from the perspective of the client machine, the server is just another remote, same as:"
+        },
+        {
+            "location": "/lxd_container_foo/#now-you-can-move-containers-around-between-servers-and-clients",
+            "text": "# launch an ubuntu container from the ubuntu remote\nlxc launch ubuntu:16.04 <optional name>\n# or from a remote named \"black\"\nlxc launch black:069b95ed3a60 <optional name>\n# to list the images that black has available\nlxc image list black:\n\n# copy a container from a server named \"black\"\n# to your local client\nlxc copy black:jerry <optional name to copy to>\n# or from \"local\" back to \"black\"\nlxc copy jerry black:<optional name to copy to>\n# or move\nlxc move black:jerry <optional name to copy to>\n\n# or change the default remote from \"local\" to \"black\"\nlxc remote set-default black\n# and then reverse the syntax\n# copy a container from a server named \"black\"\n# to your local client\nlxc copy jerry local:<optional name to copy to>\n# or from \"local\" back to \"black\"\nlxc copy local:jerry <optional name to copy to>",
+            "title": "Now you can move containers around between servers and clients."
+        },
+        {
+            "location": "/lxd_container_foo/#or-remote-control-another-lxd-server",
+            "text": "# bash shell on container named \"jim\" running on\n# a remote server named \"black\"\nlxc exec black:jim bash\n\n# copy that\nlxc copy black:jim black:francine\n\n# snapshot\nlxc snapshot black:jim\n\n# delete a snapshot from a remote container\n# first get the containers info to see what\n# snapshots it has\nlxc info black:jim\n# and then delete\nlxc delete black:jim/snap0\n\n# or rollback/restore,\n# slightly different syntax vs \"delete\"\nlxc restore black:jim snap0",
+            "title": "Or remote control another LXD server"
         },
         {
             "location": "/how_to_reassign_a_static_ip_address_with_dnsmasq/",
