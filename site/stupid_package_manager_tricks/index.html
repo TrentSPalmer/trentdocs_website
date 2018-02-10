@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>How To Reassign A Static Ip Address with dnsmasq - Trent Docs</title>
+  <title>Stupid Package Manager Tricks - Trent Docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "How To Reassign A Static Ip Address with dnsmasq";
-    var mkdocs_page_input_path = "how_to_reassign_a_static_ip_address_with_dnsmasq.md";
-    var mkdocs_page_url = "/how_to_reassign_a_static_ip_address_with_dnsmasq/";
+    var mkdocs_page_name = "Stupid Package Manager Tricks";
+    var mkdocs_page_input_path = "stupid_package_manager_tricks.md";
+    var mkdocs_page_url = "/stupid_package_manager_tricks/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -67,15 +67,9 @@
     <a class="" href="../lxd_container_foo/">LXD Container Foo</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">How To Reassign A Static Ip Address with dnsmasq</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</a></li>
-    
-
-    </ul>
+    <a class="" href="../how_to_reassign_a_static_ip_address_with_dnsmasq/">How To Reassign A Static Ip Address with dnsmasq</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -138,9 +132,21 @@
     <a class="" href="../selfoss_on_centos7/">Selfoss on Centos7</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../stupid_package_manager_tricks/">Stupid Package Manager Tricks</a>
+    <a class="current" href="./">Stupid Package Manager Tricks</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#stupid-package-manager-tricks">Stupid Package Manager Tricks</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#apt-apt-get-aptitude-dpkg">apt, apt-get ,aptitude, dpkg</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -165,7 +171,7 @@
     
       
     
-    <li>How To Reassign A Static Ip Address with dnsmasq</li>
+    <li>Stupid Package Manager Tricks</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -175,25 +181,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-reassign-a-static-ip-address-with-dnsmasq">How To Reassign a Static ip address with dnsmasq</h1>
-<p>On your router you can assign static ip addresses for various machines
-in your network, by writing the reservations in the file <code>/etc/dnsmasq.conf</code>.</p>
-<p>These will be in the form as below.</p>
-<p><code>dhcp-host=&lt;mac address&gt;,&lt;ip address&gt;</code></p>
-<p>So here's how you transfer an existing static ip address assignment to
-a new client machine. Begin by editting the file <code>/etc/dnsmasq.conf</code> on
-your router, and update the mac address associated with the intended
-ip address.</p>
-<p>Next, temporarily stop dnsmasq.</p>
-<pre><code class="bash">systemctl stop dnsmasq
-</code></pre>
-
-<p>Next shutdown networking on the new client machine. Shutting the machine down might work,
-or the command <code>dhclient -v -r</code> might get the job done (you will lose the connection).</p>
-<p>Now on the router, edit the file <code>/var/lib/misc/dnsmasq.leases</code>, and delete the pre-existing
-lease for the old client machine that will no longer exist.</p>
-<p>Restart dnsmasq on the router,<br />
-and then restart networking on the new client machine.</p>
+                <h1 id="stupid-package-manager-tricks">Stupid Package Manager Tricks</h1>
+<h2 id="apt-apt-get-aptitude-dpkg">apt, apt-get ,aptitude, dpkg</h2>
+<p>Wait what was that list of suggested packages?</p>
+<p><code>apt-cache depends &lt;package&gt;</code>
+or
+<code>apt-cache depends &lt;package&gt; | grep -i Suggests</code></p>
+<p>What versions of a package are available, (based on currently configured repositories)?</p>
+<p><code>apt-cache madison &lt;package&gt;</code></p>
               
             </div>
           </div>
@@ -201,10 +196,8 @@ and then restart networking on the new client machine.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../serve_and_share_apps_from_your_phone_with_fdroid/" class="btn btn-neutral float-right" title="Serve And Share Apps From Your Phone With Fdroid">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../lxd_container_foo/" class="btn btn-neutral" title="LXD Container Foo"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../selfoss_on_centos7/" class="btn btn-neutral" title="Selfoss on Centos7"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -230,10 +223,8 @@ and then restart networking on the new client machine.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../lxd_container_foo/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../selfoss_on_centos7/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../serve_and_share_apps_from_your_phone_with_fdroid/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

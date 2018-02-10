@@ -18,6 +18,7 @@ Obviously, the commit history will reflect the time when these documents are wri
 * [Misc Tips, Trouble Shooting](misc_tips_troubleshooting.md)
 * [Self Signed Certs](self_signed_certs.md)
 * [Selfoss on Centos7](selfoss_on_centos7.md)
+* [Stupid Package Manager Tricks](stupid_package_manager_tricks.md)
 
 <!---
     * [Template](Template.md)

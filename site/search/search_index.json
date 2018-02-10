@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nLXD Container Foo\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nGentoo LXD Container\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs\n\n\nSelfoss on Centos7",
+            "text": "Welcome to Trent Docs\n\n\nGit Repo For These Docs\n\n\nObviously, the commit history will reflect the time when these documents are written.\n\n\n\n\nApt Pinning Artful Aardvark Packages in Xenial Xerus\n\n\nLXD Container Home Server Networking For Dummies\n\n\nLXD Container Foo\n\n\nHow To Reassign A Static Ip Address with dnsmasq\n\n\nServe And Share Apps From Your Phone With Fdroid\n\n\nNspawn Containers\n\n\nGentoo LXD Container\n\n\nMastodon on Arch\n\n\nDebian Nspawn Container On Arch For Testing Apache Configurations\n\n\nDynamic Cacheing Nginx Reverse Proxy For Pacman\n\n\nFreeBSD Jails on FreeNAS\n \n\n\nQuick Dirty Redis Nspawn Container on Arch Linux\n\n\nQuick Dirty Postgresql Nspawn Container on Arch Linux\n\n\nMisc Tips, Trouble Shooting\n\n\nSelf Signed Certs\n\n\nSelfoss on Centos7\n\n\nStupid Package Manager Tricks",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#git-repo-for-these-docs",
-            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  LXD Container Foo  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Gentoo LXD Container  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs  Selfoss on Centos7",
+            "text": "Obviously, the commit history will reflect the time when these documents are written.   Apt Pinning Artful Aardvark Packages in Xenial Xerus  LXD Container Home Server Networking For Dummies  LXD Container Foo  How To Reassign A Static Ip Address with dnsmasq  Serve And Share Apps From Your Phone With Fdroid  Nspawn Containers  Gentoo LXD Container  Mastodon on Arch  Debian Nspawn Container On Arch For Testing Apache Configurations  Dynamic Cacheing Nginx Reverse Proxy For Pacman  FreeBSD Jails on FreeNAS    Quick Dirty Redis Nspawn Container on Arch Linux  Quick Dirty Postgresql Nspawn Container on Arch Linux  Misc Tips, Trouble Shooting  Self Signed Certs  Selfoss on Centos7  Stupid Package Manager Tricks",
             "title": "Git Repo For These Docs"
         },
         {
@@ -564,6 +564,21 @@
             "location": "/selfoss_on_centos7/#selfoss-on-centos-7",
             "text": "The target here is a very low resource vps running Centos7.\nYou can use mysql or postgresql, but performance is fine with sqlite database.\nYou'll need the epel repo in order to install python2-certbot-apache.  Here's a great guide for setting up apache with letsencrypt on Centos7 .  You'll want to install the following packages   mod_ssl  python2-certbot-apache  php  php-gd  php-http  php-pdo  unzip  wget   The documentation  explains how to set up\nthe config.ini and .htaccess files, RewriteEngine, RewriteBase,\ndatabase, and explains the apache modules that you\nwant enabled. Hint, use  apachectl -M ,  apachectl help , etc.  You'll probably want to extract the \napplication to  /var/www/html/selfoss/  or similar, and then add a configuration.  # /etc/httpd/conf.d/selfoss.conf\nAlias \"/selfoss/\" \"/var/www/html/selfoss/\"\n<Directory \"/var/www/html/selfoss\">\n        Options FollowSymLinks\n        AllowOverride All\n</Directory>  Make sure that the selfoss directory is owned by apache:apache.",
             "title": "Selfoss on Centos 7"
+        },
+        {
+            "location": "/stupid_package_manager_tricks/",
+            "text": "Stupid Package Manager Tricks\n\n\napt, apt-get ,aptitude, dpkg\n\n\nWait what was that list of suggested packages?\n\n\napt-cache depends <package>\n\nor\n\napt-cache depends <package> | grep -i Suggests\n\n\nWhat versions of a package are available, (based on currently configured repositories)?\n\n\napt-cache madison <package>",
+            "title": "Stupid Package Manager Tricks"
+        },
+        {
+            "location": "/stupid_package_manager_tricks/#stupid-package-manager-tricks",
+            "text": "",
+            "title": "Stupid Package Manager Tricks"
+        },
+        {
+            "location": "/stupid_package_manager_tricks/#apt-apt-get-aptitude-dpkg",
+            "text": "Wait what was that list of suggested packages?  apt-cache depends <package> \nor apt-cache depends <package> | grep -i Suggests  What versions of a package are available, (based on currently configured repositories)?  apt-cache madison <package>",
+            "title": "apt, apt-get ,aptitude, dpkg"
         }
     ]
 }
