@@ -160,6 +160,8 @@
         
             <li><a class="toctree-l3" href="#virsh-help">virsh help</a></li>
         
+            <li><a class="toctree-l3" href="#snapshots">Snapshots</a></li>
+        
         </ul>
     
 
@@ -306,6 +308,32 @@ vnet1      bridge     virbr0     virtio      52:54:00:58:bf:75
 
 <p>and thus we know what subnet to scan with nmap to find the ip address of the vm</p>
 <pre><code class="bash">nmap -sn 192.168.122.0/24
+</code></pre>
+
+<h2 id="snapshots">Snapshots</h2>
+<p>Create snapshot of vm <code>dcing</code></p>
+<pre><code class="bash">virsh snapshot-create-as --domain dcing --name dcing-snap0
+</code></pre>
+
+<p>But you don't need to name your snapshots because they are listed by time.</p>
+<pre><code class="bash">virsh snapshot-create --domain dcing
+</code></pre>
+
+<p>List snapshots for vm <code>dcing</code></p>
+<pre><code class="bash">virsh snapshot-list --domain dcing
+
+ Name                 Creation Time             State
+------------------------------------------------------------
+ 1518366561           2018-02-11 08:29:21 -0800 shutoff
+ dcing-snap0          2018-02-11 08:22:57 -0800 shutoff
+</code></pre>
+
+<p>Revert dcing to snap0</p>
+<pre><code class="bash">virsh snapshot-revert --domain dcing --snapshotname dcing-snap0
+</code></pre>
+
+<p>Delete snapshot</p>
+<pre><code class="bash">virsh snapshot-delete --domain dcing --snapshotname dcing-snap0
 </code></pre>
               
             </div>

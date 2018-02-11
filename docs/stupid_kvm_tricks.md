@@ -144,3 +144,36 @@ and thus we know what subnet to scan with nmap to find the ip address of the vm
 ```bash
 nmap -sn 192.168.122.0/24
 ```
+
+## Snapshots
+
+Create snapshot of vm `dcing`
+
+```bash
+virsh snapshot-create-as --domain dcing --name dcing-snap0
+```
+But you don't need to name your snapshots because they are listed by time.
+
+```bash
+virsh snapshot-create --domain dcing
+```
+List snapshots for vm `dcing`
+
+```bash
+virsh snapshot-list --domain dcing
+
+ Name                 Creation Time             State
+------------------------------------------------------------
+ 1518366561           2018-02-11 08:29:21 -0800 shutoff
+ dcing-snap0          2018-02-11 08:22:57 -0800 shutoff
+```
+Revert dcing to snap0
+
+```bash
+virsh snapshot-revert --domain dcing --snapshotname dcing-snap0
+```
+Delete snapshot
+
+```bash
+virsh snapshot-delete --domain dcing --snapshotname dcing-snap0
+```
