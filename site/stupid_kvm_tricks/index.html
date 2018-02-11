@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Stupid KVM Tricks - Trent Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Stupid KVM Tricks";
+    var mkdocs_page_input_path = "stupid_kvm_tricks.md";
+    var mkdocs_page_url = "/stupid_kvm_tricks/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Trent Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apt_pinning_artful_aardvark_packages_in_xenial_xerus/">Apt Pinning Artful Aardvark Packages in Xenial Xerus</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../lxd_container_home_server_networking_for_dummies/">LXD Container Home Server Networking For Dummies</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../lxd_container_foo/">LXD Container Foo</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../how_to_reassign_a_static_ip_address_with_dnsmasq/">How To Reassign A Static Ip Address with dnsmasq</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../serve_and_share_apps_from_your_phone_with_fdroid/">Serve And Share Apps From Your Phone With Fdroid</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../nspawn/">Nspawn</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../gentoo_lxd_container/">Gentoo LXD Container</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mastodon_on_arch/">Mastodon on Arch</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../debian_nspawn_container_on_arch_for_testing_apache_configurations/">Debian Nspawn Container On Arch For Testing Apache Configurations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dynamic_cacheing_nginx_reverse_proxy_for_pacman/">Dynamic Cacheing Nginx Reverse Proxy For Pacman</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../freebsd_jails_on_freenas/">FreeBSD Jails on FreeNAS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_redis_nspawn/">Quick Dirty Redis Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../arch_postgresql_nspawn/">Quick Dirty Postgresql Nspawn Container on Arch Linux</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc_tips_troubleshooting/">Misc Tips, Trouble Shooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../self_signed_certs/">Self Signed Certs</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../selfoss_on_centos7/">Selfoss on Centos7</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../stupid_package_manager_tricks/">Stupid Package Manager Tricks</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Stupid KVM Tricks</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#stupid-kvm-tricks">Stupid KVM Tricks</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#virt-install-ubuntu1604">virt-install ubuntu16.04</a></li>
+        
+            <li><a class="toctree-l3" href="#change-the-network-interface">Change the Network Interface</a></li>
+        
+            <li><a class="toctree-l3" href="#clone-the-vm">Clone the VM</a></li>
+        
+            <li><a class="toctree-l3" href="#clone-the-vm-to-another-machine">Clone the VM to another Machine</a></li>
+        
+            <li><a class="toctree-l3" href="#what-is-the-os-type-and-os-variant-type-names">What is the os-type and os-variant type names?</a></li>
+        
+            <li><a class="toctree-l3" href="#misc">misc</a></li>
+        
+            <li><a class="toctree-l3" href="#virsh-help">virsh help</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Trent Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Stupid KVM Tricks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="stupid-kvm-tricks">Stupid KVM Tricks</h1>
+<h2 id="virt-install-ubuntu1604">virt-install ubuntu16.04</h2>
+<p>Create the disk image</p>
+<p><code>qemu-img create -f qcow2 /var/lib/libvirt/images/xenial.qcow2 20G</code></p>
+<p>Command to run the install</p>
+<pre><code class="bash">virt-install \
+    --name xenial \
+    --ram 4096 \
+    --disk path=/var/lib/libvirt/images/xenial.qcow2,size=20 \
+    --vcpus 4 \
+    --os-type linux \
+    --os-variant ubuntu16.04 \
+    --network bridge=br0 \
+    --graphics none \
+    --console pty,target_type=serial \
+    --location ./ubuntu-16.04.3-server-amd64.iso \
+    --extra-args 'console=ttyS0,115200n8 serial'
+</code></pre>
+
+<h2 id="change-the-network-interface">Change the Network Interface</h2>
+<p>br0 gets addresses from the network router, but what if you want
+your vm to have be on the virbr0 192.168.122.0/24 subnet?</p>
+<p><code>virsh edit xenial</code></p>
+<p>And then 'J' all the way down to the bottom, change the interface name from br0 to
+virbr0, </p>
+<p><code>virsh start xenial</code></p>
+<p>and then look for the machine with nmap</p>
+<p><code>nmap -sn 192.168.122.0/24</code></p>
+<h2 id="clone-the-vm">Clone the VM</h2>
+<p>In this case we don't have to pre-allocate the disk image because virt-clone will do that
+for us.</p>
+<pre><code class="bash">virt-clone --original xenial --name xenial-clone \
+    --file /var/lib/libvirt/images/xenial-clone.qcow2
+</code></pre>
+
+<h2 id="clone-the-vm-to-another-machine">Clone the VM to another Machine</h2>
+<p>First dump the xml that defines the virtual machine.</p>
+<pre><code class="bash">virsh dumpxml xenial &gt; xenial.xml
+</code></pre>
+
+<p>Then copy both <code>xenial.xml</code> and <code>xenial.qcow2</code> to the new host machine. On the new kvm
+host you'll want to at least make sure your vm has the correct CPU architecture.
+The command to get a list of supported kvm cpu architectures is:</p>
+<pre><code class="bash">virsh cpu-models &lt;arch&gt;
+# i.e.
+virsh cpu-models x86_64
+</code></pre>
+
+<p>After you edit <code>xenial.xml</code> and update the correct cpu architecture, mv <code>xenial.qcow2</code>
+to <code>/var/lib/libvirt/images/</code>, clone it. <code>virt-clone</code> will handle generating new
+mac addresses for the network interfaces.</p>
+<pre><code class="xml">  &lt;cpu mode='custom' match='exact'&gt;
+    &lt;model fallback='allow'&gt;Haswell-noTSX&lt;/model&gt;
+  &lt;/cpu&gt;
+# i.e. change to above to
+  &lt;cpu mode='custom' match='exact'&gt;
+    &lt;model fallback='allow'&gt;SandyBridge&lt;/model&gt;
+  &lt;/cpu&gt;
+
+</code></pre>
+
+<pre><code class="bash">virt-clone --original-xml xenial.xml --name xenial-clone \
+    --file /var/lib/libvirt/images/xenial-clone.qcow2
+</code></pre>
+
+<h2 id="what-is-the-os-type-and-os-variant-type-names">What is the os-type and os-variant type names?</h2>
+<p><code>osinfo-query os</code></p>
+<h2 id="misc">misc</h2>
+<ul>
+<li>Start the vm <code>virsh start xenial</code>  </li>
+<li>List all the vms <code>virsh list --all</code>  </li>
+<li>Stop the vm <code>virsh destroy xenial</code>   </li>
+<li>Delete the vm <code>virsh undefine xenial</code>  </li>
+</ul>
+<h2 id="virsh-help">virsh help</h2>
+<p>The <code>virsh help</code> command returns a long chart of help information. But each section has
+a keyword.</p>
+<p>Take for instance the command <code>virsh help monitor</code>. From this we
+see the <code>domiflist</code> subcommand (among others). Unfortunately <code>domifaddr</code> doesn't seem to
+work on the Ubuntu:16.04 host, but there are other ways to find the ip address of
+a virtual machine.</p>
+<p>So now if you want to see what host interface the vm <code>xenial</code> is attached to,
+type. </p>
+<pre><code class="bash">virsh domiflist xenial
+</code></pre>
+
+<p>which returns:</p>
+<pre><code class="bash">Interface  Type       Source     Model       MAC
+-------------------------------------------------------
+vnet1      bridge     virbr0     virtio      52:54:00:58:bf:75
+</code></pre>
+
+<p>So now we can find the address of virbr0 on the host machine.</p>
+<pre><code class="bash">ifconfig virbr0
+</code></pre>
+
+<p>which returns:</p>
+<pre><code class="bash">virbr0    Link encap:Ethernet  HWaddr 52:54:00:38:87:38  
+          inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:1351 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:3037 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:232346 (232.3 KB)  TX bytes:502916 (502.9 KB)
+</code></pre>
+
+<p>and thus we know what subnet to scan with nmap to find the ip address of the vm</p>
+<pre><code class="bash">nmap -sn 192.168.122.0/24
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../stupid_package_manager_tricks/" class="btn btn-neutral" title="Stupid Package Manager Tricks"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../stupid_package_manager_tricks/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
