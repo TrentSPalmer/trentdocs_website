@@ -148,6 +148,8 @@
         
             <li><a class="toctree-l3" href="#virt-install-ubuntu1604">virt-install ubuntu16.04</a></li>
         
+            <li><a class="toctree-l3" href="#virt-install-arch-linux">virt-install Arch Linux</a></li>
+        
             <li><a class="toctree-l3" href="#change-the-network-interface">Change the Network Interface</a></li>
         
             <li><a class="toctree-l3" href="#clone-the-vm">Clone the VM</a></li>
@@ -217,6 +219,51 @@
     --console pty,target_type=serial \
     --location ./ubuntu-16.04.3-server-amd64.iso \
     --extra-args 'console=ttyS0,115200n8 serial'
+</code></pre>
+
+<h2 id="virt-install-arch-linux">virt-install Arch Linux</h2>
+<p>The <code>--extra-args</code> option lets you use a serial console. But the
+<code>--extra-args</code> option only works if you also use an <code>--location</code>
+option. But the <code>--location</code> option can only be used with certain isos.
+So use <code>--cdrom</code> instead of <code>--location</code>, drop the <code>--extra-args</code>,
+and instruct the kernel to boot with a serial console with a parameter
+at the boot splash screen.</p>
+<pre><code class="bash">qemu-img create -f qcow2 /var/lib/libvirt/images/arch.qcow2 20G
+
+virt-install --name arch --ram 4096 \
+  --disk path=/var/lib/libvirt/images/arch.qcow2,size=20 \
+  --vcpus 2 \
+  --os-type linux \
+  --os-variant ubuntu16.04 \ 
+  --network bridge=virbr0 \
+  --graphics none \ 
+  --console pty,target_type=serial \
+  --cdrom /var/lib/libvirt/images/archlinux-2018.02.01-x86_64.iso
+</code></pre>
+
+<p>the arch boot splash screen will appear in your terminal and you can 
+tap the "tab" key to edit boot parameters</p>
+<p>add "console=ttyS0" to kernel command line parameters</p>
+<p>before</p>
+<pre><code class="bash">&gt; .linux boot/x86_64/vmlinuz archisobasedir=arch archisolabel=ARCH_201802 initrd=boot/intel_ucode.img,boot/x86_64/archiso.img
+</code></pre>
+
+<p>after</p>
+<pre><code class="bash">&gt; .linux boot/x86_64/vmlinuz archisobasedir=arch archisolabel=ARCH_201802 initrd=boot/intel_ucode.img,boot/x86_64/archiso.img console=ttyS0
+</code></pre>
+
+<pre><code class="bash">
+arch boots ...
+...
+...
+...
+
+root@archiso ~ # lsblk
+NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0   7:0    0  432M  1 loop /run/archiso/sfs/airootfs
+sr0    11:0    1  539M  0 rom  /run/archiso/bootmnt
+vda   254:0    0   20G  0 disk 
+root@archiso ~ # 
 </code></pre>
 
 <h2 id="change-the-network-interface">Change the Network Interface</h2>

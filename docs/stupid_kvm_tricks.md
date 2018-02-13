@@ -22,7 +22,55 @@ virt-install \
     --location ./ubuntu-16.04.3-server-amd64.iso \
     --extra-args 'console=ttyS0,115200n8 serial'
 ```
+## virt-install Arch Linux
+The `--extra-args` option lets you use a serial console. But the
+`--extra-args` option only works if you also use an `--location`
+option. But the `--location` option can only be used with certain isos.
+So use `--cdrom` instead of `--location`, drop the `--extra-args`,
+and instruct the kernel to boot with a serial console with a parameter
+at the boot splash screen.
 
+```bash
+qemu-img create -f qcow2 /var/lib/libvirt/images/arch.qcow2 20G
+
+virt-install --name arch --ram 4096 \
+  --disk path=/var/lib/libvirt/images/arch.qcow2,size=20 \
+  --vcpus 2 \
+  --os-type linux \
+  --os-variant ubuntu16.04 \ 
+  --network bridge=virbr0 \
+  --graphics none \ 
+  --console pty,target_type=serial \
+  --cdrom /var/lib/libvirt/images/archlinux-2018.02.01-x86_64.iso
+```
+
+the arch boot splash screen will appear in your terminal and you can 
+tap the "tab" key to edit boot parameters
+
+add "console=ttyS0" to kernel command line parameters
+
+before
+```bash
+> .linux boot/x86_64/vmlinuz archisobasedir=arch archisolabel=ARCH_201802 initrd=boot/intel_ucode.img,boot/x86_64/archiso.img
+```
+after
+```bash
+> .linux boot/x86_64/vmlinuz archisobasedir=arch archisolabel=ARCH_201802 initrd=boot/intel_ucode.img,boot/x86_64/archiso.img console=ttyS0
+```
+```bash
+
+arch boots ...
+...
+...
+...
+
+root@archiso ~ # lsblk
+NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0   7:0    0  432M  1 loop /run/archiso/sfs/airootfs
+sr0    11:0    1  539M  0 rom  /run/archiso/bootmnt
+vda   254:0    0   20G  0 disk 
+root@archiso ~ # 
+```
 ## Change the Network Interface
 br0 gets addresses from the network router, but what if you want
 your vm to have be on the virbr0 192.168.122.0/24 subnet?
@@ -177,3 +225,4 @@ Delete snapshot
 ```bash
 virsh snapshot-delete --domain dcing --snapshotname dcing-snap0
 ```
+
