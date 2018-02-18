@@ -312,6 +312,31 @@ The configuration for a debian stretch container is the same, except the the fil
 `/etc/network/interfaces` will also describe eth0, but you only have to add the 
 description for eth1.
 
+### systemd-networkd
+
+This seems to work.
+
+```conf
+# eth0.network
+[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+```
+
+```conf
+# eth1.network
+[Match]
+Name=eth1
+
+[Network]
+DHCP=ipv4
+
+[DHCP]
+UseRoutes=false
+```
+
 ### the /etc/hosts file
 
 Once you assign the containers static ip addresses for their *eth1*
@@ -347,6 +372,5 @@ vim /etc/hosts
 ```
 
 etcetera
-
 
 

@@ -451,6 +451,27 @@ iface eth1 inet static
 <p>The configuration for a debian stretch container is the same, except the the file
 <code>/etc/network/interfaces</code> will also describe eth0, but you only have to add the 
 description for eth1.</p>
+<h3 id="systemd-networkd">systemd-networkd</h3>
+<p>This seems to work.</p>
+<pre><code class="conf"># eth0.network
+[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+</code></pre>
+
+<pre><code class="conf"># eth1.network
+[Match]
+Name=eth1
+
+[Network]
+DHCP=ipv4
+
+[DHCP]
+UseRoutes=false
+</code></pre>
+
 <h3 id="the-etchosts-file">the /etc/hosts file</h3>
 <p>Once you assign the containers static ip addresses for their <em>eth1</em>
 interfaces, you can use the <code>/etc/hosts</code> file on each container to make them
