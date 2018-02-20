@@ -256,6 +256,47 @@ your home network, and a second interface *eth1* connected to a non-natted subne
 a static ip on which it will be able to talk directly to the other containers and the host
 machine.
 
+### exposed profile with a regular linux br0 interface bridge
+
+You can configure an Ubuntu server with a br0 interface
+
+```conf
+# /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+# br0 bridge in dhcp configuration with ethernet
+# port ens2 added to it.
+auto br0
+iface br0 inet dhcp
+      bridge_ports ens2
+      bridge_stp off
+      bridge_maxwait 0
+```
+
+and a cooresponding profile....
+
+```yaml
+config: {}
+description: exposed LXD profile
+devices:
+  eth0:
+    nictype: bridged
+    parent: br0
+    type: nic
+  eth1:
+    nictype: bridged
+    parent: lxdbr1
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+name: exposed
+used_by: []
+```
+
+
 ## Assign Containers to Profiles and configure them to connect correctly.
 
 There are a lot of different ways that a Linux instance can solicit network services. So for
@@ -305,6 +346,44 @@ iface eth1 inet static
    broadcast 255.255.255.255 
    network 10.151.18.0
 ```
+
+### ubuntu:16.04 using only dhcp for two nics
+So the example here is tested with eth0 and eth1 connected to
+br0 and lxdbr1 respectively. You need post-up hooks for both eth0 and
+eth1 inside the containers, in order to specify the default route, eth0 gets it's configuration
+dynamically by default from cloud-init.  So disable cloud-init by
+creating the following file on the container.
+
+```conf
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+network: {config: disabled}
+```
+
+Then, on the container describe the interfaces.
+
+```conf
+# /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet dhcp
+post-up route del default dev eth1
+
+auto eth0
+iface eth0 inet dhcp
+post-up route add default dev eth0 via 192.168.1.1
+```
+
+and delete /etc/network/interfaces.d/50-cloud-init.cfg
+
+```bash
+rm /etc/network/interfaces.d/50-cloud-init.cfg
+```
+
+The advantage to this scenario is now you can make copies of the container
+without having to update the network descriptions, because both interfaces
+will solicit addresses via dhcp.
 
 ### debian stretch
 

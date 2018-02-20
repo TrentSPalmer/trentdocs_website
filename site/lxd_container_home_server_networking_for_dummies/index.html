@@ -407,6 +407,41 @@ to a macvlan, addressable from your lan, just like any other arbitrary computer 
 your home network, and a second interface <em>eth1</em> connected to a non-natted subnet, with
 a static ip on which it will be able to talk directly to the other containers and the host
 machine.</p>
+<h3 id="exposed-profile-with-a-regular-linux-br0-interface-bridge">exposed profile with a regular linux br0 interface bridge</h3>
+<p>You can configure an Ubuntu server with a br0 interface</p>
+<pre><code class="conf"># /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+# br0 bridge in dhcp configuration with ethernet
+# port ens2 added to it.
+auto br0
+iface br0 inet dhcp
+      bridge_ports ens2
+      bridge_stp off
+      bridge_maxwait 0
+</code></pre>
+
+<p>and a cooresponding profile....</p>
+<pre><code class="yaml">config: {}
+description: exposed LXD profile
+devices:
+  eth0:
+    nictype: bridged
+    parent: br0
+    type: nic
+  eth1:
+    nictype: bridged
+    parent: lxdbr1
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+name: exposed
+used_by: []
+</code></pre>
+
 <h2 id="assign-containers-to-profiles-and-configure-them-to-connect-correctly">Assign Containers to Profiles and configure them to connect correctly.</h2>
 <p>There are a lot of different ways that a Linux instance can solicit network services. So for
 now I will just describe a method that will work here for a lxc container from ubuntu:16.04, as
@@ -447,6 +482,37 @@ iface eth1 inet static
    network 10.151.18.0
 </code></pre>
 
+<h3 id="ubuntu1604-using-only-dhcp-for-two-nics">ubuntu:16.04 using only dhcp for two nics</h3>
+<p>So the example here is tested with eth0 and eth1 connected to
+br0 and lxdbr1 respectively. You need post-up hooks for both eth0 and
+eth1 inside the containers, in order to specify the default route, eth0 gets it's configuration
+dynamically by default from cloud-init.  So disable cloud-init by
+creating the following file on the container.</p>
+<pre><code class="conf"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+network: {config: disabled}
+</code></pre>
+
+<p>Then, on the container describe the interfaces.</p>
+<pre><code class="conf"># /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet dhcp
+post-up route del default dev eth1
+
+auto eth0
+iface eth0 inet dhcp
+post-up route add default dev eth0 via 192.168.1.1
+</code></pre>
+
+<p>and delete /etc/network/interfaces.d/50-cloud-init.cfg</p>
+<pre><code class="bash">rm /etc/network/interfaces.d/50-cloud-init.cfg
+</code></pre>
+
+<p>The advantage to this scenario is now you can make copies of the container
+without having to update the network descriptions, because both interfaces
+will solicit addresses via dhcp.</p>
 <h3 id="debian-stretch">debian stretch</h3>
 <p>The configuration for a debian stretch container is the same, except the the file
 <code>/etc/network/interfaces</code> will also describe eth0, but you only have to add the 
